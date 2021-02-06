@@ -12,6 +12,21 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
         db.execSQL("create table recetas_his(receta int primary key, linea int primary key, fecha date, ingrediente text, cantidad real, tipo_medicion text)")
     }
 
+    create table recetas
+    (codigo int primary key,
+    descripcion text,
+    ingredientes text,
+    elaboracion text,
+    foto text,
+    url text)
+
+    create table recetas_his
+    (receta int primary key,
+    linea int primary key,
+    fecha date,
+    ingredientes text
+    elbaoracion text,
+    foto text)
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
 
     }

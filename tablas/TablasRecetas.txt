@@ -1,0 +1,15 @@
+create table recetas
+    (codigo int primary key,
+     descripcion text, 
+     ingredientes text, 
+     elaboracion text,
+     foto text,
+     url text)
+
+create table recetas_his
+    (receta int primary key, 
+    linea int primary key, 
+    fecha date, 
+    ingredientes text
+    elbaoracion text,
+    foto text)
