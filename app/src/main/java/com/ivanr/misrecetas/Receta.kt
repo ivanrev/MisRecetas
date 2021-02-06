@@ -1,16 +1,18 @@
 package com.ivanr.misrecetas
 
 class Receta {
-    var descripcion: String? = null
-    var ingredientes: String? = null
-    var elbaoracion: String? = null
+    var v_descripcion: String? = null
+    var v_ingredientes: String? = null
+    var v_elaboracion: String? = null
+    var v_url: String? = null
+    var v_foto: String? = null
 
-    var url: String? = null
-
-    constructor(descripcion: String, elaboracion: String, url: String) {
-        this.descripcion = descripcion
-        this.ingredientes = ingredientes
-        this.elbaoracion = elbaoracion
-        this.url = url
+    public constructor(p_descripcion: String?, p_ingredientes: String?, p_elaboracion: String?, p_url: String?, p_foto: String?) {
+        this.v_descripcion = p_descripcion
+        this.v_ingredientes = p_ingredientes
+        this.v_elaboracion = p_elaboracion
+        this.v_url = p_url
+        this.v_foto = p_foto
     }
+
 }

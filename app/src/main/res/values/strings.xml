@@ -11,4 +11,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="nuevaReceta">Nueva Receta</string>
     <string name="ultimasRecetas">Úlltimas Recetas</string>
+    <string name="descripcio_n_receta">Descripción Receta</string>
+    <string name="elaboracion_receta">Elaboracion Receta</string>
+    <string name="url_receta">Url Receta</string>
+    <string name="guardar_receta">Guardar Receta</string>
 </resources>
