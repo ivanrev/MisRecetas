@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    android:weightSum="10"
+    android:padding="10dp"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="9">
+
+        <TextView
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:textSize="18sp"
+            android:text="Descripción Receta"
+            android:id="@+id/tvDescripcion"/>
+        <TextView
+            android:padding="5dp"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="Indicaciones"
+            android:id="@+id/tvIndicaciones"/>
+    </LinearLayout>
+    <!--
+    <LinearLayout
+        android:orientation="vertical" android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_weight="1" android:gravity="right">
+        <ImageView android:layout_height="30dp" android:layout_width="30dp" android:id="@+id/ivEdit" app:srcCompat="@drawable/ic_edit"/>
+        <ImageView android:layout_height="30dp" android:layout_width="30dp" android:id="@+id/ivDelete" app:srcCompat="@drawable/ic_delete"/>
+    </LinearLayout>
+    -->
+</LinearLayout>

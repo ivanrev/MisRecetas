@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NuevaReceta">
+
+    <EditText
+        android:id="@+id/etDescripcion"
+        android:layout_width="271dp"
+        android:layout_height="49dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Descripcioón Receta"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <EditText
+        android:id="@+id/etIndicaciones"
+        android:layout_width="273dp"
+        android:layout_height="210dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Indicaciones Receta"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="79dp"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/etUrl"
+        android:layout_width="267dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Url Receta"
+        tools:layout_editor_absoluteX="117dp"
+        tools:layout_editor_absoluteY="312dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ultimasRecetas"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
