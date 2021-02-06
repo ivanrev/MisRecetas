@@ -1,18 +1,12 @@
 <resources>
-    <string name="app_name">Mis Recetas</string>
+    <string name="app_name">My Recipes</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="action_search">Search</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="nuevaReceta">Nueva Receta</string>
-    <string name="ultimasRecetas">Úlltimas Recetas</string>
-    <string name="descripcio_n_receta">Descripción Receta</string>
-    <string name="elaboracion_receta">Elaboracion Receta</string>
-    <string name="url_receta">Url Receta</string>
-    <string name="guardar_receta">Guardar Receta</string>
+    <!-- Cadenas utilizadas en la app -->
+    <string name="nuevaReceta">New Recipe</string>
+    <string name="descripcio_n_receta">Recipe description</string>
+    <string name="elaboracion_receta">Recipe elaboration</string>
+    <string name="url_receta">Recipe URL</string>
+    <string name="guardar_receta">Save Recipe</string>
 </resources>

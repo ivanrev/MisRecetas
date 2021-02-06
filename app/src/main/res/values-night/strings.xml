@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="elaboracion_receta">Elaboracion Receta</string>
-    <string name="url_receta">Url Receta</string>
+    <string name="elaboracion_receta">Recipe elaboration</string>
+    <string name="url_receta">Recipe URL</string>
 </resources>

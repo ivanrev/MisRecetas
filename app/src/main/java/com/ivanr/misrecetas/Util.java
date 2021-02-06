@@ -20,9 +20,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- * Created by revuelta on 09/10/2015.
- */
 public class Util {
     static int ms_vibra = 1000;
 

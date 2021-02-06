@@ -7,13 +7,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.BaseAdapter
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
+
 
 class MainActivity : AppCompatActivity() {
     val util = Util()
@@ -22,25 +20,25 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        asocia_controles()
+        consultarRecetas ()
+    }
+
+    fun asocia_controles () {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
+            //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
             startActivity(Intent(this@MainActivity, ActividadNuevaReceta::class.java)) //.putExtras(getIntent().getExtras()));
-
         }
 
         lvRecetas = findViewById(R.id.lvRecetas) as ListView
         lvRecetas.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             util.mensaje(this, "Receta: " + listaRecetas[position].v_descripcion)
         }
-
-        consultarRecetas ()
-
     }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -57,6 +55,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        finish()
+    }
     fun consultarRecetas () {
         val admin = AdminSQLite(this, "recetas", null, 1)
         var fila = admin.consultar(admin, "select descripcion, elaboracion from recetas order by codigo desc")
@@ -89,7 +90,6 @@ class MainActivity : AppCompatActivity() {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
             val view: View?
             val vh: ViewHolder
-
             if (convertView == null) {
                 view = layoutInflater.inflate(R.layout.receta, parent, false)
                 vh = ViewHolder(view)
@@ -99,23 +99,17 @@ class MainActivity : AppCompatActivity() {
                 view = convertView
                 vh = view.tag as ViewHolder
             }
-
             var mReceta = recetasList[position]
-
             vh.tvDescripcion.text = mReceta.v_descripcion
             vh.tvIndicaciones.text = mReceta.v_elaboracion
-
             return view
         }
-
         override fun getItem(position: Int): Any {
             return recetasList[position]
         }
-
         override fun getItemId(position: Int): Long {
             return position.toLong()
         }
-
         override fun getCount(): Int {
             return recetasList.size
         }

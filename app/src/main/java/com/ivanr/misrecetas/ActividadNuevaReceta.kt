@@ -38,5 +38,8 @@ class ActividadNuevaReceta : AppCompatActivity() {
     fun crearReceta () {
         val admin = AdminSQLite(this, "recetas", null, 1)
         admin.creaReceta(this, admin, etDescripcion.getText().toString(), etElaboracion.getText().toString(), etUrl.getText().toString())
+        //Volvemos atras y actualizarmos los datos al crear el MainActivity
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 }

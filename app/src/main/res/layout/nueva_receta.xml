@@ -12,27 +12,41 @@
 
         <EditText
             android:id="@+id/etDescripcion"
-            android:layout_width="271dp"
-            android:layout_height="49dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:autofillHints=""
             android:ems="10"
             android:inputType="textPersonName"
             android:text="@string/descripcio_n_receta"
+            android:textSize="24sp"
+            android:textStyle="bold"
             tools:ignore="MissingConstraints" />
 
         <EditText
+            android:id="@+id/etIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="166dp"
+            android:ems="10"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
+            android:text="Ingredientes" />
+
+        <EditText
             android:id="@+id/etIndicaciones"
-            android:layout_width="273dp"
-            android:layout_height="210dp"
+            android:layout_width="match_parent"
+            android:layout_height="255dp"
             android:autofillHints=""
             android:ems="10"
-            android:inputType="textPersonName"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:singleLine="false"
             android:text="@string/elaboracion_receta"
             tools:ignore="MissingConstraints" />
 
         <EditText
             android:id="@+id/etUrl"
-            android:layout_width="267dp"
+            android:layout_width="match_parent"
             android:layout_height="46dp"
             android:autofillHints=""
             android:ems="10"
