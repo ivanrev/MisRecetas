@@ -1,5 +1,6 @@
 package com.ivanr.misrecetas
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,16 +10,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity() {
     var vg_seleccionado:Boolean = false
     val util = Util()
     var listaRecetas = ArrayList<Receta>()
     lateinit var lvRecetas : ListView
-    lateinit var ivBorrar: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,16 +45,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             util.mensaje(this, "CLICK LARGO. Receta: " + listaRecetas[position].v_descripcion)
             vg_seleccionado = true
             true
-        }
-
-        ivBorrar = findViewById(R.id.ivBorrar) as ImageView
-        ivBorrar.setOnClickListener(this@MainActivity)
-
-    }
-
-    override fun onClick(view: View?) {
-        if (view != null) {
-            util.mensaje(view.context, "Tag:" + view.getTag() )
         }
     }
 
@@ -86,15 +75,16 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     fun consultarRecetas () {
         val admin = AdminSQLite(this, "recetas", null, 1)
-        var fila = admin.consultar(admin, "select descripcion, elaboracion from recetas order by codigo desc")
+        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion from recetas order by codigo desc")
         listaRecetas.clear()
         if (fila != null) {
             if (fila.moveToFirst()) {
                 do {
+                    val id = fila.getInt(fila.getColumnIndex("codigo"))
                     val descripcion = fila.getString(fila.getColumnIndex("descripcion"))
                     val elaboracion = fila.getString(fila.getColumnIndex("elaboracion"))
 
-                    listaRecetas.add(Receta(descripcion, null, elaboracion, null, null))
+                    listaRecetas.add(Receta(id, descripcion, null, elaboracion, null, null))
 
                 } while (fila.moveToNext())
             }
@@ -116,17 +106,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
             val view: View?
             val vh: ViewHolder
+            var mReceta = recetasList[position]
+
             if (convertView == null) {
                 view = layoutInflater.inflate(R.layout.receta, parent, false)
-                vh = ViewHolder(view)
+                vh = ViewHolder(view, position, mReceta.v_id)
                 view.tag = vh
-
                 //Log.i("JSA", "set Tag for ViewHolder, position: " + position)
             } else {
                 view = convertView
                 vh = view.tag as ViewHolder
             }
-            var mReceta = recetasList[position]
+
             //vh.ivImagen.drawable = mReceta.v_foto
             vh.tvDescripcion.text = mReceta.v_descripcion
             vh.tvIndicaciones.text = mReceta.v_elaboracion
@@ -144,16 +135,24 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private class ViewHolder(view: View?) {
+    @SuppressLint("WrongViewCast")
+    private class ViewHolder(view: View?, position: Int, p_id_receta: Int?) {
+        val util = Util()
         val tvDescripcion: TextView
         val tvIndicaciones: TextView
         //val ivImagen: ImageView
+        val btBorrar: ImageButton
 
         init {
             this.tvDescripcion = view?.findViewById(R.id.tvDescripcion) as TextView
             this.tvIndicaciones = view?.findViewById(R.id.tvIndicaciones) as TextView
             //this.ivImagen = view?.findViewById(R.id.ivImagen) as ImageView
-
+            this.btBorrar = view?.findViewById(R.id.btBorrar) as ImageButton
+            btBorrar.setOnClickListener()  {
+                val admin = AdminSQLite(view.context, "recetas", null, 1)
+                admin.borrarReceta(view.context, admin, p_id_receta)
+                //util.mensaje (view.context, "Estoy en boton borrar. Posición:"+position+";IdReceta:"+p_id_receta)
+            }
         }
     }
 }

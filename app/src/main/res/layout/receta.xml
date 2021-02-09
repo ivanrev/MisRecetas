@@ -23,7 +23,7 @@
 
             <ImageView
                 android:id="@+id/ivImagen"
-                android:layout_width="25dp"
+                android:layout_width="3dp"
                 android:layout_height="65dp"
                 android:layout_weight="8"
                 tools:srcCompat="@android:drawable/btn_star_big_on" />
@@ -50,14 +50,16 @@
                     android:padding="5dp"
                     android:text="@string/elaboracion_receta"
                     android:textSize="12sp" />
+
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/ivBorrar"
-                android:layout_width="15dp"
+            <ImageButton
+                android:id="@+id/btBorrar"
+                android:layout_width="3dp"
                 android:layout_height="match_parent"
                 android:layout_weight="8"
-                app:srcCompat="@android:drawable/ic_delete" />
+                app:srcCompat="@android:drawable/ic_menu_delete" />
+
         </LinearLayout>
     </LinearLayout>
 
