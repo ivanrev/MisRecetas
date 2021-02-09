@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+    var vg_seleccionado:Boolean = false
     val util = Util()
     var listaRecetas = ArrayList<Receta>()
     lateinit var lvRecetas : ListView
+    lateinit var ivBorrar: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +38,27 @@ class MainActivity : AppCompatActivity() {
 
         lvRecetas = findViewById(R.id.lvRecetas) as ListView
         lvRecetas.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
-            util.mensaje(this, "Receta: " + listaRecetas[position].v_descripcion)
+            util.mensaje(this, "CLICK. Receta: " + listaRecetas[position].v_descripcion +
+                    //", Item:" + adapterView.getItemAtPosition(position) +
+                     ",Position:"+position+ ", ITem: " + adapterView.getItemIdAtPosition(position) + "," + adapterView.getTag() +","+adapterView.selectedItemPosition)
+        }
+        lvRecetas.onItemLongClickListener = AdapterView.OnItemLongClickListener() { adapterview, view, position, id ->
+            util.mensaje(this, "CLICK LARGO. Receta: " + listaRecetas[position].v_descripcion)
+            vg_seleccionado = true
+            true
+        }
+
+        ivBorrar = findViewById(R.id.ivBorrar) as ImageView
+        ivBorrar.setOnClickListener(this@MainActivity)
+
+    }
+
+    override fun onClick(view: View?) {
+        if (view != null) {
+            util.mensaje(view.context, "Tag:" + view.getTag() )
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_main, menu)
@@ -56,8 +76,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        finish()
+        if (vg_seleccionado) {
+            onBackPressed()
+        }
+        else {
+            finish()
+        }
     }
+
     fun consultarRecetas () {
         val admin = AdminSQLite(this, "recetas", null, 1)
         var fila = admin.consultar(admin, "select descripcion, elaboracion from recetas order by codigo desc")
@@ -94,14 +120,17 @@ class MainActivity : AppCompatActivity() {
                 view = layoutInflater.inflate(R.layout.receta, parent, false)
                 vh = ViewHolder(view)
                 view.tag = vh
+
                 //Log.i("JSA", "set Tag for ViewHolder, position: " + position)
             } else {
                 view = convertView
                 vh = view.tag as ViewHolder
             }
             var mReceta = recetasList[position]
+            //vh.ivImagen.drawable = mReceta.v_foto
             vh.tvDescripcion.text = mReceta.v_descripcion
             vh.tvIndicaciones.text = mReceta.v_elaboracion
+
             return view
         }
         override fun getItem(position: Int): Any {
@@ -118,11 +147,13 @@ class MainActivity : AppCompatActivity() {
     private class ViewHolder(view: View?) {
         val tvDescripcion: TextView
         val tvIndicaciones: TextView
-        //val ivEdit: ImageView
+        //val ivImagen: ImageView
+
         init {
             this.tvDescripcion = view?.findViewById(R.id.tvDescripcion) as TextView
             this.tvIndicaciones = view?.findViewById(R.id.tvIndicaciones) as TextView
-            //this.ivEdit = view?.findViewById(R.id.ivEdit) as ImageView
+            //this.ivImagen = view?.findViewById(R.id.ivImagen) as ImageView
+
         }
     }
 }
