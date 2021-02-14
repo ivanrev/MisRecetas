@@ -4,12 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import app.com.kotlinapp.OnSwipeTouchListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -39,13 +38,31 @@ class MainActivity : AppCompatActivity() {
         lvRecetas.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             util.mensaje(this, "CLICK. Receta: " + listaRecetas[position].v_descripcion +
                     //", Item:" + adapterView.getItemAtPosition(position) +
-                     ",Position:"+position+ ", ITem: " + adapterView.getItemIdAtPosition(position) + "," + adapterView.getTag() +","+adapterView.selectedItemPosition)
+                    ",Position:" + position + ", ITem: " + adapterView.getItemIdAtPosition(position) + "," + adapterView.getTag() + "," + adapterView.selectedItemPosition)
         }
         lvRecetas.onItemLongClickListener = AdapterView.OnItemLongClickListener() { adapterview, view, position, id ->
             util.mensaje(this, "CLICK LARGO. Receta: " + listaRecetas[position].v_descripcion)
             vg_seleccionado = true
             true
         }
+        lvRecetas.setOnTouchListener(object : OnSwipeTouchListener(this@MainActivity, ) {
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                Toast.makeText(this@MainActivity, "Swipe Left gesture detected",Toast.LENGTH_SHORT).show()
+            }
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+                Toast.makeText(this@MainActivity,"Swipe Right gesture detected",Toast.LENGTH_SHORT).show()
+            }
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                Toast.makeText(this@MainActivity, "Swipe up gesture detected", Toast.LENGTH_SHORT).show()
+            }
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                Toast.makeText(this@MainActivity, "Swipe down gesture detected", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -155,4 +172,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
