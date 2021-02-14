@@ -1,18 +1,14 @@
-package com.ivanr.misrecetas
+package com.ivanr.misrecetas.actividades
 
-import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.fragment.findNavController
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
+import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.R
+import com.ivanr.misrecetas.utilidades.Util
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.

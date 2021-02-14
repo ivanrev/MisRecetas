@@ -1,15 +1,18 @@
-package com.ivanr.misrecetas
+package com.ivanr.misrecetas.actividades
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import android.view.GestureDetector.SimpleOnGestureListener
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import app.com.kotlinapp.OnSwipeTouchListener
+import com.ivanr.misrecetas.listener.OnSwipeTouchListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.R
+import com.ivanr.misrecetas.clases.Receta
+import com.ivanr.misrecetas.utilidades.Util
 
 
 class MainActivity : AppCompatActivity() {
@@ -162,9 +165,9 @@ class MainActivity : AppCompatActivity() {
 
         init {
             this.tvDescripcion = view?.findViewById(R.id.tvDescripcion) as TextView
-            this.tvIndicaciones = view?.findViewById(R.id.tvIndicaciones) as TextView
+            this.tvIndicaciones = view.findViewById(R.id.tvIndicaciones) as TextView
             //this.ivImagen = view?.findViewById(R.id.ivImagen) as ImageView
-            this.btBorrar = view?.findViewById(R.id.btBorrar) as ImageButton
+            this.btBorrar = view.findViewById(R.id.btBorrar) as ImageButton
             btBorrar.setOnClickListener()  {
                 val admin = AdminSQLite(view.context, "recetas", null, 1)
                 admin.borrarReceta(view.context, admin, p_id_receta)

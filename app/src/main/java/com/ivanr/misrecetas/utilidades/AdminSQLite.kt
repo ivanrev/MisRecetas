@@ -1,4 +1,4 @@
-package com.ivanr.misrecetas
+package com.ivanr.misrecetas.utilidades
 
 import android.content.ContentValues
 import android.content.Context

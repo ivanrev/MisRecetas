@@ -1,4 +1,4 @@
-package com.ivanr.misrecetas
+package com.ivanr.misrecetas.clases
 
 class Receta {
     var v_id: Int? = null
