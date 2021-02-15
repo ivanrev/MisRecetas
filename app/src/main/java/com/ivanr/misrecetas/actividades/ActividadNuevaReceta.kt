@@ -1,13 +1,15 @@
 package com.ivanr.misrecetas.actividades
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.ivanr.misrecetas.utilidades.AdminSQLite
+import androidx.fragment.app.Fragment
 import com.ivanr.misrecetas.R
+import com.ivanr.misrecetas.utilidades.AdminSQLite
 import com.ivanr.misrecetas.utilidades.Util
 
 /**
@@ -22,13 +24,30 @@ class ActividadNuevaReceta : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.nueva_receta)
+
+        asociarControles()
+    }
+
+    fun asociarControles () {
         etDescripcion = findViewById(R.id.etDescripcion)
         etElaboracion = findViewById(R.id.etIndicaciones)
         etUrl = findViewById(R.id.etUrl)
 
         findViewById<Button>(R.id.bt_Crear_Receta).setOnClickListener {
-           crearReceta()
+            crearReceta()
         }
+        findViewById<ImageButton>(R.id.ib_ir_url).setOnClickListener {
+            var v_url = etUrl.getText().toString()
+            if (v_url != "" ) {
+                val uri: Uri = Uri.parse(v_url)
+                val intent = Intent(Intent.ACTION_VIEW, uri)
+                startActivity(intent)
+            }
+            else {
+                util.mensaje(this, "No hay URL para navegar")
+            }
+        }
+
     }
 
     fun crearReceta () {

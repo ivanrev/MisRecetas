@@ -8,4 +8,5 @@
     <string name="elaboracion_receta">Elaboración Receta</string>
     <string name="url_receta">Url Receta</string>
     <string name="guardar_receta">Guardar Receta</string>
+    <string name="ingredientes">Ingredientes Receta</string>
 </resources>

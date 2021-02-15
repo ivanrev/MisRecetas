@@ -9,4 +9,6 @@
     <string name="elaboracion_receta">Recipe elaboration</string>
     <string name="url_receta">Recipe URL</string>
     <string name="guardar_receta">Save Recipe</string>
+    <string name="ingredientes">Ingredientes Receta</string>
+    <string name="todo">TODO</string>
 </resources>

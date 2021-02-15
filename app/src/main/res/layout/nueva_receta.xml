@@ -6,9 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:id="@+id/linearLayout"
+        android:layout_width="367dp"
+        android:layout_height="607dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/bt_Crear_Receta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
             android:id="@+id/etDescripcion"
@@ -16,8 +21,8 @@
             android:layout_height="wrap_content"
             android:autofillHints=""
             android:ems="10"
+            android:hint="@string/descripcio_n_receta"
             android:inputType="textPersonName"
-            android:text="@string/descripcio_n_receta"
             android:textSize="24sp"
             android:textStyle="bold"
             tools:ignore="MissingConstraints" />
@@ -28,9 +33,10 @@
             android:layout_height="166dp"
             android:ems="10"
             android:gravity="start|top"
+            android:hint="@string/ingredientes"
             android:inputType="textMultiLine"
             android:singleLine="false"
-            android:text="Ingredientes" />
+            android:autofillHints="" />
 
         <EditText
             android:id="@+id/etIndicaciones"
@@ -39,20 +45,34 @@
             android:autofillHints=""
             android:ems="10"
             android:gravity="start|top"
+            android:hint="@string/elaboracion_receta"
             android:inputType="textMultiLine"
             android:singleLine="false"
-            android:text="@string/elaboracion_receta"
             tools:ignore="MissingConstraints" />
 
-        <EditText
-            android:id="@+id/etUrl"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:inputType="textUri|text"
-            android:text="@string/url_receta"
-            tools:ignore="MissingConstraints" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/etUrl"
+                android:layout_width="317dp"
+                android:layout_height="57dp"
+                android:autofillHints=""
+                android:ems="10"
+                android:hint="@string/url_receta"
+                android:inputType="textUri|text"
+                tools:ignore="MissingConstraints" />
+
+            <ImageButton
+                android:id="@+id/ib_ir_url"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/buscar" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
@@ -60,6 +80,8 @@
         android:id="@+id/bt_Crear_Receta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:drawableEnd="@drawable/ic_baseline_save_24"
         android:text="@string/guardar_receta"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
