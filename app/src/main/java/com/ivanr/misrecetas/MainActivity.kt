@@ -1,4 +1,4 @@
-package com.ivanr.misrecetas.actividades
+package com.ivanr.misrecetas
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,10 +7,9 @@ import android.os.Bundle
 import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.ivanr.misrecetas.listener.OnSwipeTouchListener
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ivanr.misrecetas.utilidades.AdminSQLite
-import com.ivanr.misrecetas.R
+import com.ivanr.misrecetas.actividades.ActividadNuevaReceta
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.Util
 
@@ -49,21 +48,9 @@ class MainActivity : AppCompatActivity() {
             true
         }
         lvRecetas.setOnTouchListener(object : OnSwipeTouchListener(this@MainActivity, ) {
-            override fun onSwipeLeft() {
-                super.onSwipeLeft()
-                Toast.makeText(this@MainActivity, "Swipe Left gesture detected",Toast.LENGTH_SHORT).show()
-            }
-            override fun onSwipeRight() {
-                super.onSwipeRight()
-                Toast.makeText(this@MainActivity,"Swipe Right gesture detected",Toast.LENGTH_SHORT).show()
-            }
-            override fun onSwipeUp() {
-                super.onSwipeUp()
-                Toast.makeText(this@MainActivity, "Swipe up gesture detected", Toast.LENGTH_SHORT).show()
-            }
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                Toast.makeText(this@MainActivity, "Swipe down gesture detected", Toast.LENGTH_SHORT).show()
+                consultarRecetas()
             }
         })
     }

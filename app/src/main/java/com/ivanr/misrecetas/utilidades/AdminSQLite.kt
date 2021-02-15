@@ -10,7 +10,7 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
     val util = Util()
 
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("create table recetas(codigo int primary key autoincrement, \n" +
+        db.execSQL("create table recetas(codigo INTEGER PRIMARY KEY autoincrement, \n" +
                 " descripcion text,\n" +
                 " ingredientes text,\n" +
                 " elaboracion text,\n" +
@@ -40,8 +40,8 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
     fun borrarReceta (p_context: Context?, p_admin: AdminSQLite, p_id_Receta: Int?) {
         util.mensaje (p_context, "Estoy en boton borrar. IdReceta:"+p_id_Receta)
         val bd = p_admin.writableDatabase
-        //var v_borrado = bd.delete("recetas", "codigo=${p_id_Receta}", null)
-        var v_borrado = bd.delete("recetas", null, null)
+        var v_borrado = bd.delete("recetas", "codigo=${p_id_Receta}", null)
+        //var v_borrado = bd.delete("recetas", null, null)
         bd.close()
         if (v_borrado == 1) {
             util.mensaje (p_context, "Se ha borrado la receta correctamente")
