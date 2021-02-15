@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         asocia_controles()
+        asigna_eventos()
         consultarRecetas ()
     }
 
@@ -31,12 +32,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        lvRecetas = findViewById(R.id.lvRecetas) as ListView
+    }
+
+    fun asigna_eventos () {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
             //Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show()
             startActivity(Intent(this@MainActivity, ActividadNuevaReceta::class.java)) //.putExtras(getIntent().getExtras()));
         }
-
-        lvRecetas = findViewById(R.id.lvRecetas) as ListView
         lvRecetas.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
             util.mensaje(this, "CLICK. Receta: " + listaRecetas[position].v_descripcion +
                     //", Item:" + adapterView.getItemAtPosition(position) +
@@ -101,6 +104,8 @@ class MainActivity : AppCompatActivity() {
         lvRecetas.adapter = recetasAdapter
     }
 
+//ADAPTADOR RECETAS Y HOLDER.
+//______________________________________________
     inner class RecetasAdapter : BaseAdapter {
         private var recetasList = ArrayList<Receta>()
         private var context: Context? = null

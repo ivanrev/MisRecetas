@@ -38,7 +38,6 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
         util.mensaje (p_context,"Se cargaron los datos del artículo")
     }
     fun borrarReceta (p_context: Context?, p_admin: AdminSQLite, p_id_Receta: Int?) {
-        util.mensaje (p_context, "Estoy en boton borrar. IdReceta:"+p_id_Receta)
         val bd = p_admin.writableDatabase
         var v_borrado = bd.delete("recetas", "codigo=${p_id_Receta}", null)
         //var v_borrado = bd.delete("recetas", null, null)
