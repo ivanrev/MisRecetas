@@ -23,6 +23,14 @@ import java.io.IOException;
 public class Util {
     static int ms_vibra = 1000;
 
+    public void muestraOculta(View view){
+        if (view.getVisibility() == View.VISIBLE) {
+            view.setVisibility(View.INVISIBLE);
+        } else {
+            view.setVisibility(View.VISIBLE);
+        }
+    }
+
     public void mensaje(Context context, String txt) {
         //Toast toast2 = Toast.makeText(getApplicationContext(), "Toast con gravity", Toast.LENGTH_SHORT);
         Toast toast2 = Toast.makeText(context, txt, Toast.LENGTH_SHORT);

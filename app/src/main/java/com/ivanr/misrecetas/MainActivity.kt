@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     val util = Util()
     var listaRecetas = ArrayList<Receta>()
     lateinit var lvRecetas : ListView
+    lateinit var btBorrar_evento: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +33,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        lvRecetas = findViewById(R.id.lvRecetas) as ListView
+        lvRecetas = findViewById(R.id.lvRecetas)
+        //btBorrar_evento = findViewById(R.id.btBorrar)
     }
 
     fun asigna_eventos () {
@@ -55,7 +57,13 @@ class MainActivity : AppCompatActivity() {
                 super.onSwipeDown()
                 consultarRecetas()
             }
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+                util.mensaje(this@MainActivity, "Izquierda")
+                util.muestraOculta(btBorrar_evento)
+            }
         })
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -149,11 +157,11 @@ class MainActivity : AppCompatActivity() {
 
     @SuppressLint("WrongViewCast")
     private class ViewHolder(view: View?, position: Int, p_id_receta: Int?) {
+        private var btBorrar: ImageButton
         val util = Util()
         val tvDescripcion: TextView
         val tvIndicaciones: TextView
         //val ivImagen: ImageView
-        val btBorrar: ImageButton
 
         init {
             this.tvDescripcion = view?.findViewById(R.id.tvDescripcion) as TextView
