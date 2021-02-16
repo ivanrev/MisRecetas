@@ -1,17 +1,18 @@
-package com.ivanr.misrecetas
-
+package app.com.kotlinapp
 import android.content.Context
 import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.MotionEvent
 import android.view.View
-import java.lang.Math.abs
+import android.view.View.OnTouchListener
+import kotlin.math.abs
 
-internal open class OnSwipeTouchListener (c: Context?) : View.OnTouchListener {
+internal open class OnSwipeTouchListener(c: Context?) :OnTouchListener {
     private val gestureDetector: GestureDetector
     override fun onTouch(view: View, motionEvent: MotionEvent): Boolean {
         return gestureDetector.onTouchEvent(motionEvent)
     }
-    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+    private inner class GestureListener : SimpleOnGestureListener() {
         private val SWIPE_THRESHOLD: Int = 100
         private val SWIPE_VELOCITY_THRESHOLD: Int = 100
         override fun onDown(e: MotionEvent): Boolean {

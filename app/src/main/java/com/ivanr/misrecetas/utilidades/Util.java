@@ -7,10 +7,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Vibrator;
+import android.print.PrintAttributes;
+import android.print.PrintDocumentAdapter;
+import android.print.PrintManager;
 import android.text.Html;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
@@ -19,6 +23,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import static android.provider.Settings.System.getString;
 
 public class Util {
     static int ms_vibra = 1000;
@@ -66,72 +72,24 @@ public class Util {
 
         context.startActivity(mail);
     }
-
-    public static boolean grabaBitmapPNG(Context context, Bitmap bmp, String nombreFichero) {
-        FileOutputStream out = null;
-        boolean ok = true;
-        try {
-            ContextWrapper cw = new ContextWrapper(context);
-            // path to /data/data/yourapp/app_data/imageDir
-            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-            // Create imageDir
-            File mypath=new File(directory,nombreFichero);
-            out = new FileOutputStream(mypath);
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
-            // PNG is a lossless format, the compression factor (100) is ignored
-        } catch (Exception e) {
-            ok = false;
-        } finally {
-            try {
-                if (out != null) {
-                    out.close();
-                }
-                return ok;
-            } catch (IOException e) {
-                return false;
-            }
-        }
+    // convert from bitmap to byte array
+    public static byte[] img_to_array(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+        return stream.toByteArray();
     }
 
-    public static Bitmap cargaBitmap(String path, String nombreFichero) {
-        try {
-            File f=new File(path, nombreFichero);
-            Bitmap bmp = BitmapFactory.decodeStream(new FileInputStream(f));
-            return bmp;
-        }
-        catch (FileNotFoundException e)
-        {
-            return null;
-        }
+    // convert from byte array to bitmap
+    public static Bitmap array_t_img (byte[] image) {
+        return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
 
-    protected byte[] codificaImagenParaGrabar(Bitmap bitmapFoto) {
-        if (bitmapFoto != null) {
-            try {
-                int bytes = bitmapFoto.getByteCount();
-
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream(bytes);
-                byte[] datos;
-                int compresion = 10;
-                do {
-                    bitmapFoto.compress(Bitmap.CompressFormat.JPEG, 100 - compresion, outputStream);
-                    datos = outputStream.toByteArray();
-                    compresion += 10;
-                    outputStream.reset();
-                } while (datos.length > 500000 && compresion <= 100);
-                outputStream.flush();
-                outputStream.close();
-                if (compresion > 90)
-                    return null;
-                else
-                    return datos;
-            } catch (Exception e) {
-                return null;
-            }
-        } else {
-            return null;
-        }
-    }
+/*    private void imprimir (WebView webView, String p_nombre_app) {
+        PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
+        PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter("MyDocument");
+        String jobName = p_nombre_app  + " Print Test";
+        printManager.print(jobName, printAdapter, new PrintAttributes.Builder().build());
+    }*/
 
 
 }
