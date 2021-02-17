@@ -17,12 +17,11 @@
             android:theme="@style/Theme.MisRecetas.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".actividades.ActividadNuevaReceta">
-        </activity>
+        <activity android:name=".actividades.ActividadNuevaReceta" />
     </application>
 
 </manifest>

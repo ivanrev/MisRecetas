@@ -2,7 +2,7 @@ package com.ivanr.misrecetas.clases
 
 import android.graphics.Bitmap
 
-class Receta {
+class Receta  {
     var v_id: Int
     var v_descripcion: String?
     var v_ingredientes: String?

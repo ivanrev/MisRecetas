@@ -1,6 +1,7 @@
 package com.ivanr.misrecetas.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,12 +9,15 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import com.ivanr.misrecetas.MainActivity
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.AdminSQLite
 import com.ivanr.misrecetas.utilidades.Utilidades
 
-class RecetasAdapter : BaseAdapter, View.OnClickListener {
+
+class RecetasAdapter : BaseAdapter {
     val util = Utilidades ()
     private var recetasList = ArrayList<Receta>()
     private var context: Context?
@@ -61,9 +65,13 @@ class RecetasAdapter : BaseAdapter, View.OnClickListener {
         return recetasList.size
     }
 
-    fun asignaAcciones (vh: ViewHolder, view: View?, recetasList:ArrayList<Receta>, mReceta: Receta) {
-        vh.tvDescripcion.setOnClickListener(this)
-        vh.tvIndicaciones.setOnClickListener(this)
+    fun asignaAcciones(vh: ViewHolder, view: View?, recetasList: ArrayList<Receta>, mReceta: Receta) {
+        vh.tvDescripcion.setOnClickListener {
+            navegar_detalle(mReceta)
+        }
+        vh.tvIndicaciones.setOnClickListener {
+            navegar_detalle(mReceta)
+        }
         vh.btBorrar.setOnClickListener {
             val admin = AdminSQLite(view?.context, "recetas", null, 1)
             admin.borrarReceta(view?.context, admin, mReceta.v_id)
@@ -73,7 +81,7 @@ class RecetasAdapter : BaseAdapter, View.OnClickListener {
         vh.btFavorito.setOnClickListener {
             val admin = AdminSQLite(view?.context, "recetas", null, 1)
             if (mReceta.v_favorito == "N") {
-                admin.actualizar( admin, "recetas", "favorito", "S", mReceta.v_id)
+                admin.actualizar(admin, "recetas", "favorito", "S", mReceta.v_id)
                 mReceta.v_favorito = "S"
                 vh.btFavorito.setImageResource(R.drawable.ic_corazon_lleno)
             } else {
@@ -83,14 +91,16 @@ class RecetasAdapter : BaseAdapter, View.OnClickListener {
             }
             notifyDataSetChanged()
         }
+
+    }
+    fun navegar_detalle (p_receta: Receta) {
+        val intent = Intent(context, MainActivity::class.java)
+        val recetas = ArrayList<Receta>()
+        recetas.add(p_receta)
+        intent.putExtra("receta", recetas)
+        AppCompatActivity().startActivity(intent)
     }
 
-    override fun onClick(p0: View?) {
-        if (p0?.id == R.id.tvDescripcion || p0?.id == R.id.tvIndicaciones) {
-            //Ir a detalle de receta.
-            util.mensaje(context, "Desc e Indi")
-        }
-    }
     class ViewHolder(view: View?, position: Int, p_id_receta: Int?, p_favorito: String?) {
         val tvDescripcion: TextView
         val tvIndicaciones: TextView
