@@ -1,19 +1,20 @@
 package com.ivanr.misrecetas.adapters
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.utilidades.Utilidades
 
-class RecetasAdapter : BaseAdapter {
-    lateinit var holder: ViewHolder
+class RecetasAdapter : BaseAdapter, View.OnClickListener {
+    val util = Utilidades ()
     private var recetasList = ArrayList<Receta>()
     private var context: Context?
 
@@ -43,13 +44,10 @@ class RecetasAdapter : BaseAdapter {
         } else {
             vh.btFavorito.setImageResource(R.drawable.ic_corazon_vacio)
         }
+        //vh.ivImagen.setImageBitmap(util.array_to_img(util.string_to_Bytearray (mReceta.v_foto)))
+        //vh.ivImagen.setImageURI(Uri.parse(mReceta.v_foto))
         asignaAcciones(vh, view, recetasList, mReceta)
 
-        //if (position%2==0){
-        //    view?.setBackgroundColor(Color.CYAN)
-        //}else{
-        //    view?.setBackgroundColor(Color.WHITE)
-        //}
         return view
     }
     override fun getItem(position: Int): Any {
@@ -63,6 +61,8 @@ class RecetasAdapter : BaseAdapter {
     }
 
     fun asignaAcciones (vh: ViewHolder, view: View?, recetasList:ArrayList<Receta>, mReceta: Receta) {
+        vh.tvDescripcion.setOnClickListener(this)
+        vh.tvIndicaciones.setOnClickListener(this)
         vh.btBorrar.setOnClickListener {
             val admin = AdminSQLite(view?.context, "recetas", null, 1)
             admin.borrarReceta(view?.context, admin, mReceta.v_id)
@@ -83,16 +83,25 @@ class RecetasAdapter : BaseAdapter {
             notifyDataSetChanged()
         }
     }
+
+    override fun onClick(p0: View?) {
+        if (p0?.id == R.id.tvDescripcion || p0?.id == R.id.tvIndicaciones) {
+            //Ir a detalle de receta.
+            util.mensaje(context, "Desc e Indi")
+        }
+    }
     class ViewHolder(view: View?, position: Int, p_id_receta: Int?, p_favorito: String?) {
         val tvDescripcion: TextView
         val tvIndicaciones: TextView
         val btFavorito: ImageButton
         val btBorrar: ImageButton
+        val ivImagen: ImageView
         init {
             this.tvDescripcion = view?.findViewById(R.id.tvDescripcion) as TextView
             this.tvIndicaciones = view.findViewById(R.id.tvIndicaciones) as TextView
             this.btFavorito = view.findViewById(R.id.btFavorito)
             this.btBorrar = view.findViewById(R.id.btBorrar)
+            this.ivImagen = view.findViewById(R.id.iv_Receta)
         }
     }
 }

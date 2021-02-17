@@ -10,12 +10,12 @@ import com.ivanr.misrecetas.actividades.ActividadNuevaReceta
 import com.ivanr.misrecetas.adapters.RecetasAdapter
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.AdminSQLite
-import com.ivanr.misrecetas.utilidades.Util
+import com.ivanr.misrecetas.utilidades.Utilidades
 
 
 class MainActivity : AppCompatActivity() {
     var vg_seleccionado:Boolean = false
-    val util = Util()
+    val util = Utilidades()
     var listaRecetas = ArrayList<Receta>()
     lateinit var lvRecetas : ListView
     lateinit var recetasAdapter: RecetasAdapter
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
 
     fun consultarRecetas () {
         val admin = AdminSQLite(this, "recetas", null, 1)
-        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, foto, favorito from recetas order by codigo desc")
+        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto from recetas order by codigo desc")
         var listaRecetas = admin.carga_lista_recetas (fila)
         recetasAdapter = RecetasAdapter(this, listaRecetas)
         lvRecetas.adapter = recetasAdapter

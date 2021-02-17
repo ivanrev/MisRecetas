@@ -1,22 +1,26 @@
 package com.ivanr.misrecetas.clases
 
-class Receta {
-    var v_id: Int? = null
-    var v_descripcion: String? = null
-    var v_ingredientes: String? = null
-    var v_elaboracion: String? = null
-    var v_url: String? = null
-    var v_foto: String? = null
-    var v_favorito: String? = null
+import android.graphics.Bitmap
 
-    public constructor(p_id: Int, p_descripcion: String?, p_ingredientes: String?, p_elaboracion: String?, p_url: String?, p_foto: String?, p_favorito: String?) {
-        this.v_id = p_id
-        this.v_descripcion = p_descripcion
-        this.v_ingredientes = p_ingredientes
-        this.v_elaboracion = p_elaboracion
-        this.v_url = p_url
-        this.v_foto = p_foto
-        this.v_favorito = p_favorito
+class Receta {
+    var v_id: Int
+    var v_descripcion: String?
+    var v_ingredientes: String?
+    var v_elaboracion: String?
+    var v_url: String?
+    var v_favorito: String?
+    //lateinit var v_foto: Bitmap
+
+    public constructor(p_id: Int, p_descripcion: String?, p_ingredientes: String?, p_elaboracion: String?, p_url: String?, p_favorito: String?) {
+        v_id = p_id
+        v_descripcion = p_descripcion
+        v_ingredientes = p_ingredientes
+        v_elaboracion = p_elaboracion
+        v_url = p_url
+        v_favorito = p_favorito
     }
+    /*fun put_foto (p_imagen: Bitmap) {
+        v_foto = p_imagen
+    }*/
 
 }
