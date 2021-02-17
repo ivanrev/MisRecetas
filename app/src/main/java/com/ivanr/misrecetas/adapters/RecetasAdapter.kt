@@ -44,6 +44,7 @@ class RecetasAdapter : BaseAdapter, View.OnClickListener {
         } else {
             vh.btFavorito.setImageResource(R.drawable.ic_corazon_vacio)
         }
+        vh.ivImagen.setImageBitmap(mReceta.v_foto)
         //vh.ivImagen.setImageBitmap(util.array_to_img(util.string_to_Bytearray (mReceta.v_foto)))
         //vh.ivImagen.setImageURI(Uri.parse(mReceta.v_foto))
         asignaAcciones(vh, view, recetasList, mReceta)

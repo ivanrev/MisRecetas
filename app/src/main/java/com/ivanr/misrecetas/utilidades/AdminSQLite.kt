@@ -7,8 +7,6 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Bitmap
 import com.ivanr.misrecetas.clases.Receta
-import java.io.File
-import java.io.FileOutputStream
 
 class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
     val util = Utilidades()
@@ -83,7 +81,7 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
 
                     var foto_bm = util.array_to_img(foto)
                     val vr_receta = Receta(id, descripcion, ingredientes, elaboracion, url, favorito)
-                    //vr_receta.put_foto(foto_bm)
+                    vr_receta.put_foto(foto_bm)
                     listaRecetas.add(vr_receta)
                 } while (fila.moveToNext())
             }
