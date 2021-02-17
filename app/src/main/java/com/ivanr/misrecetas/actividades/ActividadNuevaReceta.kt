@@ -2,7 +2,6 @@ package com.ivanr.misrecetas.actividades
 
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -15,7 +14,6 @@ import com.ivanr.misrecetas.MainActivity
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.utilidades.AdminSQLite
 import com.ivanr.misrecetas.utilidades.Utilidades
-import java.io.IOException
 
 
 class ActividadNuevaReceta : AppCompatActivity() {
@@ -24,7 +22,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
     lateinit var etElaboracion:TextView
     lateinit var etUrl:TextView
     private val PHOTO_SELECTED = 0
-    var vg_imagen_bitmap: Bitmap = assetsToBitmap("ic_launcher_background")!!
+    var vg_imagen: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,10 +55,10 @@ class ActividadNuevaReceta : AppCompatActivity() {
         if (resultCode== RESULT_OK && requestCode == PHOTO_SELECTED) {
             val selectedImage = data!!.data
             findViewById<ImageView>(R.id.ivImagenReceta).setImageURI(selectedImage)
-            vg_imagen_bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage)
+            vg_imagen = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage)
         }
     }
-
+/*
     private fun assetsToBitmap(fileName:String): Bitmap?{
         return try{
             val stream = assets.open(fileName)
@@ -70,7 +68,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
             null
         }
     }
-
+*/
     fun seleccionarImagen() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
@@ -79,9 +77,11 @@ class ActividadNuevaReceta : AppCompatActivity() {
 
     fun crearReceta () {
         val admin = AdminSQLite(this, "recetas", null, 1)
-        admin.creaReceta(this, admin, etDescripcion.getText().toString(), etElaboracion.getText().toString(), etUrl.getText().toString(), vg_imagen_bitmap, "N")
+        //    var vg_imagen_bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_imagen_vacio)
+        admin.creaReceta(this, admin, etDescripcion.getText().toString(), etElaboracion.getText().toString(), etUrl.getText().toString(), vg_imagen, "N")
         //Volvemos atras y actualizarmos los datos al crear el MainActivity
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
     }
 }
+

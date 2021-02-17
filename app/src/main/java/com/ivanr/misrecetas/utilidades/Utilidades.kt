@@ -57,9 +57,9 @@ class Utilidades {
         context.startActivity(mail)
     }
 
-    fun img_to_array(bitmap: Bitmap): ByteArray {
+    fun img_to_array(bitmap: Bitmap?): ByteArray {
         val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream)
+        bitmap?.compress(Bitmap.CompressFormat.PNG, 0, stream)
         return stream.toByteArray()
     }
 

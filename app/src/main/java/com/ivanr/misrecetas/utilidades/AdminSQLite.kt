@@ -30,7 +30,7 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
     }
 
-    fun creaReceta(p_context: Context?, p_admin: AdminSQLite, p_descripcion: String, p_elaboracion: String, p_url: String, p_foto: Bitmap, p_favorito: String) {
+    fun creaReceta(p_context: Context?, p_admin: AdminSQLite, p_descripcion: String, p_elaboracion: String, p_url: String, p_foto: Bitmap?, p_favorito: String) {
         val bd = p_admin.writableDatabase
         val receta = ContentValues()
         var v_imagen_ba = util.img_to_array(p_foto)
