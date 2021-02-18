@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ivanr.misrecetas.MainActivity
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.utilidades.Parametros
 import com.ivanr.misrecetas.utilidades.Utilidades
 
 
 class ActividadNuevaReceta : AppCompatActivity() {
-    val util = Utilidades()
+    val util = Utilidades
+    private val rParam = Parametros
     lateinit var etDescripcion: TextView
     lateinit var etElaboracion:TextView
     lateinit var etUrl:TextView
@@ -58,17 +60,6 @@ class ActividadNuevaReceta : AppCompatActivity() {
             vg_imagen = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage)
         }
     }
-/*
-    private fun assetsToBitmap(fileName:String): Bitmap?{
-        return try{
-            val stream = assets.open(fileName)
-            BitmapFactory.decodeStream(stream)
-        }catch (e: IOException){
-            e.printStackTrace()
-            null
-        }
-    }
-*/
     fun seleccionarImagen() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
@@ -76,7 +67,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
     }
 
     fun crearReceta () {
-        val admin = AdminSQLite(this, "recetas", null, 1)
+        val admin = AdminSQLite(this, "recetas", null, rParam.VERSION_BD)
         //    var vg_imagen_bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_imagen_vacio)
         admin.creaReceta(admin, etDescripcion.getText().toString(), etElaboracion.getText().toString(), etUrl.getText().toString(), vg_imagen, "N")
         //Volvemos atras y actualizarmos los datos al crear el MainActivity

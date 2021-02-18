@@ -1,8 +1,10 @@
 package com.ivanr.misrecetas.clases
 
 import android.graphics.Bitmap
+import com.google.gson.Gson
 
-class Receta  {
+class Receta {
+
     var v_id: Int
     var v_descripcion: String?
     var v_ingredientes: String?
@@ -22,5 +24,14 @@ class Receta  {
     fun put_foto (p_imagen: Bitmap?) {
         v_foto = p_imagen
     }
+    fun get_foto (): Bitmap? {
+        return v_foto
+    }
+
+    override fun toString(): String {
+        return "Receta [id: ${this.v_id}, descripcion: ${this.v_descripcion}, ingredientes: ${this.v_ingredientes}, elaboracion: ${this.v_elaboracion}"+
+                        ", url: ${this.v_url}, favorito: ${this.v_favorito}]"
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.ivanr.misrecetas.utilidades
 
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -11,12 +12,12 @@ import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.google.gson.Gson
+import com.ivanr.misrecetas.clases.Receta
 import java.io.*
 
-class Utilidades {
-    companion object {
-        var ms_vibra = 1000
-    }
+object Utilidades {
+    var ms_vibra = 1000
 
     fun muestraOculta(view: View) {
         if (view.visibility == View.VISIBLE) {
@@ -40,7 +41,7 @@ class Utilidades {
 
     fun vibra(context: Context) {
         val v = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        v.vibrate(com.ivanr.misrecetas.utilidades.Utilidades.Companion.ms_vibra.toLong())
+        v.vibrate(ms_vibra.toLong())
     }
 
     fun llamada(context: Context, telefono: String) {
@@ -63,18 +64,10 @@ class Utilidades {
         return stream.toByteArray()
     }
 
-    fun array_to_img(image: ByteArray): Bitmap? {
-        return BitmapFactory.decodeByteArray(image, 0, image.size)
-    }
-
-    fun uri_to_img(p_uri:String):Bitmap?{
-        return try{
-            val stream = null//(assets.open(p_uri))
-            return BitmapFactory.decodeStream(stream)
-        }catch (e: IOException){
-            e.printStackTrace()
-            null
-        }
+    fun array_to_img(image: ByteArray?): Bitmap? {
+        if (image!= null) {
+            return BitmapFactory.decodeByteArray(image, 0, image.size)
+        } else return null
     }
 
     fun string_to_Bytearray (file: String): ByteArray? {
@@ -94,6 +87,19 @@ class Utilidades {
             //System.err.println(e2.getMessage())
         }
         return if (bos != null) bos.toByteArray() else null
+    }
+
+    fun receta_to_json (p_receta: Receta): String {
+        var gson = Gson()
+        var jsonString = gson.toJson(p_receta)
+        return jsonString
+    }
+    fun json_to_receta (p_json: String): Receta {
+        var gson = Gson()
+        var jsonString = p_json
+        var v_receta = gson.fromJson (jsonString, Receta::class.java)
+
+        return v_receta
     }
 
     /*    private void imprimir (WebView webView, String p_nombre_app) {

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_det_receta">
+
+    <fragment
+        android:id="@+id/navigation_det_receta"
+        android:name="com.ivanr.misrecetas.fragments.FragmentDetReceta"
+        android:label="@string/titulo_det_receta"
+        tools:layout="@layout/fragment_det_receta" />
+
+    <fragment
+        android:id="@+id/navigation_det_notas"
+        android:name="com.ivanr.misrecetas.fragments.FragmentDetNotas"
+        android:label="@string/titulo_det_notas"
+        tools:layout="@layout/fragment_det_notas" />
+
+    <fragment
+        android:id="@+id/navigation_det_imagenes"
+        android:name="com.ivanr.misrecetas.fragments.FragmentDetImagenes"
+        android:label="@string/titulo_det_imagenes"
+        tools:layout="@layout/fragment_det_imagenes" />
+</navigation>

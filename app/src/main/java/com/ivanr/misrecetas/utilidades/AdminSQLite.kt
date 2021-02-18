@@ -9,9 +9,10 @@ import android.graphics.Bitmap
 import com.ivanr.misrecetas.clases.Receta
 
 class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
-    val util = Utilidades()
+    val util = Utilidades
 
     override fun onCreate(db: SQLiteDatabase) {
+        //Tablas para version 1, de base de datos.
         db.execSQL("create table recetas(codigo INTEGER PRIMARY KEY autoincrement, \n" +
                 " descripcion text,\n" +
                 " ingredientes text,\n" +
@@ -19,14 +20,17 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
                 " foto blob,\n" +
                 " url text,\n" +
                 " favorito text)")
-        db.execSQL("create table recetas_his(receta int ,\n" +
-                "    linea int ,\n" +
-                "    fecha date,\n" +
-                "    ingredientes text\n" +
-                "    elbaoracion text,\n" +
-                "    foto blob)")
+        db.execSQL("create table recetas_his(receta INTEGER PRIMARY KEY ,\n" +
+                " linea INTEGER PRIMARY KEY autoincrement ,\n" +
+                " fecha date,\n" +
+                " notas text,\n" +
+                " ingredientes text\n" +
+                " elbaoracion text,\n" +
+                " foto blob)")
+        db.execSQL("create table recetas_img(receta INTEGER PRIMARY KEY ,\n" +
+                " linea INTEGER PRIMARY KEY autoincrement ,\n" +
+                " foto blob)")
     }
-
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
     }
 
@@ -58,10 +62,9 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
         receta.put(p_campo, p_valor)
         bd.update(p_tabla, receta, "codigo=${p_id_Receta}", null)
     }
-
-    fun carga_lista_recetas(fila: Cursor?):  ArrayList<Receta> {
+    fun carga_lista_recetas(fila: Cursor?, p_registros:Int):  ArrayList<Receta> {
         var listaRecetas = ArrayList<Receta>()
-        var imagen: String = "a"
+        var v_Cont:Int = 0
 
         listaRecetas.clear()
         if (fila != null) {
@@ -83,7 +86,9 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
                     val vr_receta = Receta(id, descripcion, ingredientes, elaboracion, url, favorito)
                     vr_receta.put_foto(foto_bm)
                     listaRecetas.add(vr_receta)
-                } while (fila.moveToNext())
+                    v_Cont ++
+                    if (v_Cont == p_registros) { break }
+                } while (fila.moveToNext() )
             }
         }
         return listaRecetas

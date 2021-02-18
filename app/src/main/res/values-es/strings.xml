@@ -14,4 +14,9 @@
     <string name="tab_text_1">Últimas Recetas</string>
     <string name="tab_text_2">Favoritos</string>
     <string name="tab_text_3">Categorias</string>
+    <string name="titulo_det_receta">Receta</string>
+    <string name="titulo_det_notas">Notas</string>
+    <string name="titulo_det_imagenes">Imagenes</string>
+    <string name="title_activity_actividad_detalle_receta">Detalle Receta</string>
+    <string name="title_activity_actividad_detalle">ActividadDetalle</string>
 </resources>

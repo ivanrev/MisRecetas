@@ -11,6 +11,7 @@ import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.adapters.RecetasAdapter
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.utilidades.Parametros
 import com.ivanr.misrecetas.utilidades.Utilidades
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,6 +25,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class FragmentUltimas : Fragment() {
+    private val rParam = Parametros
     lateinit var lvRecetas : ListView
     lateinit var recetasAdapter: RecetasAdapter
 
@@ -57,9 +59,9 @@ class FragmentUltimas : Fragment() {
     }
 
     fun consultarRecetas (p_context: Context) {
-        val admin = AdminSQLite(p_context, "recetas", null, 1)
+        val admin = AdminSQLite(p_context, "recetas", null, rParam.VERSION_BD)
         var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto from recetas order by codigo desc")
-        var listaRecetas = admin.carga_lista_recetas (fila)
+        var listaRecetas = admin.carga_lista_recetas (fila, 999)
         recetasAdapter = RecetasAdapter(p_context, listaRecetas)
         lvRecetas.adapter = recetasAdapter
     }

@@ -1,4 +1,4 @@
-package com.ivanr.misrecetas.ui.main
+package com.ivanr.misrecetas.ui.det
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,19 +13,19 @@ import com.ivanr.misrecetas.R
 /**
  * A placeholder fragment containing a simple view.
  */
-class PlaceholderFragment : Fragment() {
+class PlaceholderFragmentDet : Fragment() {
 
-    private lateinit var pageViewModel: PageViewModel
+    private lateinit var pageViewModel: PageViewModelDet
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pageViewModel = ViewModelProvider(this).get(PageViewModel::class.java).apply {
+        pageViewModel = ViewModelProvider(this).get(PageViewModelDet::class.java).apply {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
     }
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
-        val root = inflater.inflate(R.layout.fragment_main, container, false)
+        val root = inflater.inflate(R.layout.fragment_actividad_detalle, container, false)
         val textView: TextView = root.findViewById(R.id.section_label)
         pageViewModel.text.observe(this, Observer<String> {
             textView.text = it
@@ -45,8 +45,8 @@ class PlaceholderFragment : Fragment() {
          * number.
          */
         @JvmStatic
-        fun newInstance(sectionNumber: Int): PlaceholderFragment {
-            return PlaceholderFragment().apply {
+        fun newInstance(sectionNumber: Int): PlaceholderFragmentDet {
+            return PlaceholderFragmentDet().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_SECTION_NUMBER, sectionNumber)
                 }

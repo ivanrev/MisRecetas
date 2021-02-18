@@ -2,6 +2,7 @@ package com.ivanr.misrecetas.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +10,17 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import com.ivanr.misrecetas.MainActivity
 import com.ivanr.misrecetas.R
+import com.ivanr.misrecetas.actividades.ActividadDetalle
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.utilidades.Parametros
 import com.ivanr.misrecetas.utilidades.Utilidades
 
+
 class RecetasAdapter : BaseAdapter {
-    val util = Utilidades ()
+    private val util = Utilidades
+    private val rParam = Parametros
     private var recetasList = ArrayList<Receta>()
     private var context: Context?
 
@@ -33,7 +36,7 @@ class RecetasAdapter : BaseAdapter {
 
         if (convertView == null) {
             view = LayoutInflater.from(this.context).inflate(R.layout.receta, parent, false)
-            vh = ViewHolder(view, position, mReceta.v_id, mReceta.v_favorito)
+            vh = ViewHolder(view)
             view.tag = vh
         } else {
             view = convertView
@@ -62,23 +65,23 @@ class RecetasAdapter : BaseAdapter {
         return recetasList.size
     }
 
-    fun asignaAcciones (vh: ViewHolder, view: View?, recetasList:ArrayList<Receta>, mReceta: Receta) {
+    fun asignaAcciones(vh: ViewHolder, view: View?, recetasList: ArrayList<Receta>, mReceta: Receta) {
         vh.tvDescripcion.setOnClickListener {
-            navegar_detalle(mReceta)
+            navegar_detalle(view?.context!!, mReceta)
         }
         vh.tvIndicaciones.setOnClickListener {
-            navegar_detalle(mReceta)
+            navegar_detalle(view?.context!!, mReceta)
         }
         vh.btBorrar.setOnClickListener {
-            val admin = AdminSQLite(view?.context, "recetas", null, 1)
+            val admin = AdminSQLite(view?.context, "recetas", null, rParam.VERSION_BD)
             admin.borrarReceta(admin, mReceta.v_id)
             recetasList.remove(mReceta)
             notifyDataSetChanged()
         }
         vh.btFavorito.setOnClickListener {
-            val admin = AdminSQLite(view?.context, "recetas", null, 1)
+            val admin = AdminSQLite(view?.context, "recetas", null, rParam.VERSION_BD)
             if (mReceta.v_favorito == "N") {
-                admin.actualizar( admin, "recetas", "favorito", "S", mReceta.v_id)
+                admin.actualizar(admin, "recetas", "favorito", "S", mReceta.v_id)
                 mReceta.v_favorito = "S"
                 vh.btFavorito.setImageResource(R.drawable.ic_corazon_lleno)
             } else {
@@ -90,15 +93,17 @@ class RecetasAdapter : BaseAdapter {
         }
     }
 
-    fun navegar_detalle (p_receta: Receta) {
-        val intent = Intent(context, MainActivity::class.java)
-        val recetas = ArrayList<Receta>()
-        recetas.add(p_receta)
-        intent.putExtra("receta", recetas)
-        AppCompatActivity().startActivity(intent)
+    fun navegar_detalle(p_context: Context, p_receta: Receta) {
+        val intent = Intent(p_context, ActividadDetalle::class.java)
+        val bundle = Bundle()
+        bundle.putInt("id_receta", p_receta.v_id)
+        bundle.putString("descripcion_receta", p_receta.v_descripcion)
+        intent.putExtras(bundle)
+
+        p_context.startActivity(intent)
     }
 
-    class ViewHolder(view: View?, position: Int, p_id_receta: Int?, p_favorito: String?) {
+    class ViewHolder(view: View?) {
         val tvDescripcion: TextView
         val tvIndicaciones: TextView
         val btFavorito: ImageButton
