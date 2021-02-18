@@ -71,7 +71,7 @@ class RecetasAdapter : BaseAdapter {
         }
         vh.btBorrar.setOnClickListener {
             val admin = AdminSQLite(view?.context, "recetas", null, 1)
-            admin.borrarReceta(view?.context, admin, mReceta.v_id)
+            admin.borrarReceta(admin, mReceta.v_id)
             recetasList.remove(mReceta)
             notifyDataSetChanged()
         }

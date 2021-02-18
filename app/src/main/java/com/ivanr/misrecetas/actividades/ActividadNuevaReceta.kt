@@ -78,7 +78,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
     fun crearReceta () {
         val admin = AdminSQLite(this, "recetas", null, 1)
         //    var vg_imagen_bitmap: Bitmap = BitmapFactory.decodeResource(resources, R.drawable.ic_imagen_vacio)
-        admin.creaReceta(this, admin, etDescripcion.getText().toString(), etElaboracion.getText().toString(), etUrl.getText().toString(), vg_imagen, "N")
+        admin.creaReceta(admin, etDescripcion.getText().toString(), etElaboracion.getText().toString(), etUrl.getText().toString(), vg_imagen, "N")
         //Volvemos atras y actualizarmos los datos al crear el MainActivity
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

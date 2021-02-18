@@ -9,7 +9,7 @@ class Receta  {
     var v_elaboracion: String?
     var v_url: String?
     var v_favorito: String?
-    lateinit var v_foto: Bitmap
+    var v_foto: Bitmap? = null
 
     public constructor(p_id: Int, p_descripcion: String?, p_ingredientes: String?, p_elaboracion: String?, p_url: String?, p_favorito: String?) {
         v_id = p_id
@@ -19,7 +19,7 @@ class Receta  {
         v_url = p_url
         v_favorito = p_favorito
     }
-    fun put_foto (p_imagen: Bitmap) {
+    fun put_foto (p_imagen: Bitmap?) {
         v_foto = p_imagen
     }
 

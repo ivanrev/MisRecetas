@@ -63,7 +63,7 @@ class Utilidades {
         return stream.toByteArray()
     }
 
-    fun array_to_img(image: ByteArray): Bitmap {
+    fun array_to_img(image: ByteArray): Bitmap? {
         return BitmapFactory.decodeByteArray(image, 0, image.size)
     }
 

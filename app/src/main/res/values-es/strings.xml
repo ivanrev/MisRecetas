@@ -10,4 +10,8 @@
     <string name="guardar_receta">Guardar Receta</string>
     <string name="ingredientes">Ingredientes Receta</string>
     <string name="sel_Imagen">Seleccionar Imagen</string>
+    <string name="title_activity_main">Mis Recetas</string>
+    <string name="tab_text_1">Últimas Recetas</string>
+    <string name="tab_text_2">Favoritos</string>
+    <string name="tab_text_3">Categorias</string>
 </resources>
