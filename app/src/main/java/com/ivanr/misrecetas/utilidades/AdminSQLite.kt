@@ -6,6 +6,7 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Bitmap
+import android.util.Log
 import com.ivanr.misrecetas.clases.Receta
 
 class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
@@ -56,11 +57,22 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
         var fila = bd.rawQuery(p_sql, null)
         return fila
     }
-    fun actualizar(p_admin: AdminSQLite, p_tabla: String, p_campo: String, p_valor: String, p_id_Receta: Int?) {
+    fun actualizar(p_admin: AdminSQLite, p_tabla: String, p_id_Receta: Int?, p_campos_string: Array<String?> , p_valores_string: Array<String?>) {
         val bd = p_admin.writableDatabase
         val receta = ContentValues()
-        receta.put(p_campo, p_valor)
-        bd.update(p_tabla, receta, "codigo=${p_id_Receta}", null)
+        var v_Actualizar = "N"
+        if (p_campos_string.size > 0) {
+            var vCont = 0
+            for (campo in p_campos_string) {
+                receta.put(campo, p_valores_string[vCont])
+                vCont++
+            }
+            v_Actualizar = "S"
+        }
+
+        if (v_Actualizar == "S") {
+            bd.update(p_tabla, receta, "codigo=${p_id_Receta}", null)
+        }
     }
     fun carga_lista_recetas(fila: Cursor?, p_registros:Int):  ArrayList<Receta> {
         var listaRecetas = ArrayList<Receta>()

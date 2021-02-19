@@ -1,5 +1,6 @@
 package com.ivanr.misrecetas.utilidades
 
+import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -102,6 +103,11 @@ object Utilidades {
         return v_receta
     }
 
+    fun navega_url (p_context: Context, p_url:String) {
+        val uri: Uri = Uri.parse(p_url)
+        val intent = Intent(Intent.ACTION_VIEW, uri)
+        p_context.startActivity(intent)
+    }
     /*    private void imprimir (WebView webView, String p_nombre_app) {
         PrintManager printManager = (PrintManager) this.getSystemService(Context.PRINT_SERVICE);
         PrintDocumentAdapter printAdapter = webView.createPrintDocumentAdapter("MyDocument");

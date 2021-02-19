@@ -39,9 +39,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
         findViewById<ImageButton>(R.id.ib_ir_url).setOnClickListener {
             var v_url = etUrl.getText().toString()
             if (v_url != "" ) {
-                val uri: Uri = Uri.parse(v_url)
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                startActivity(intent)
+                util.navega_url(this, v_url)
             }
             else {
                 util.mensaje(this, "No hay URL para navegar")

@@ -87,7 +87,7 @@
 
             <Button
                 android:id="@+id/btSeImagen"
-                android:layout_width="142dp"
+                android:layout_width="156dp"
                 android:layout_height="wrap_content"
                 android:paddingTop="0dp"
                 android:text="@string/sel_Imagen" />

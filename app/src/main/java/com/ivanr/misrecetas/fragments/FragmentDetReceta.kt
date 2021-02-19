@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,14 +17,18 @@ import com.ivanr.misrecetas.utilidades.Parametros
 import com.ivanr.misrecetas.utilidades.Utilidades
 
 
-class FragmentDetReceta : Fragment() {
+class FragmentDetReceta : Fragment(), View.OnClickListener {
     private val rParam = Parametros
     private val util = Utilidades
     private lateinit var vr_receta: Receta
     private lateinit var root: View
     private lateinit var recetaViewModel: RecetaViewModel
-    private lateinit var tv_descripcion: TextView
     private lateinit var iv_imagen: ImageView
+    private lateinit var iv_Favorito: ImageView
+    private lateinit var tv_descripcion: TextView
+    private lateinit var et_Elaboracion: EditText
+    private lateinit var et_Ingredientes: EditText
+    private lateinit var et_Url: EditText
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         recetaViewModel = ViewModelProvider(this).get(RecetaViewModel::class.java)
@@ -51,9 +56,16 @@ class FragmentDetReceta : Fragment() {
     }
 
     fun asocia_controles () {
-        tv_descripcion = root.findViewById(R.id.tvDet_DescripcionReceta)
         iv_imagen = root.findViewById(R.id.ivDet_ImagenReceta)
+        iv_Favorito = root.findViewById(R.id.ivDet_Favorito)
+        tv_descripcion = root.findViewById(R.id.tvDet_DescripcionReceta)
+        et_Elaboracion = root.findViewById(R.id.etDet_elaboracion)
+        et_Ingredientes = root.findViewById(R.id.etDet_ingredientes)
+        et_Url = root.findViewById(R.id.etDet_Url)
+
+        et_Url.setOnClickListener(this)
     }
+
     fun recupera_parametros () {
         var parametros: Bundle? = getActivity()?.getIntent()?.getExtras()
         val v_id_receta = parametros!!.getInt("id_receta")
@@ -66,7 +78,26 @@ class FragmentDetReceta : Fragment() {
         vr_receta = listaRecetas.first()
     }
     fun inicializa_datos () {
-        tv_descripcion.setText(vr_receta.v_descripcion)
         iv_imagen.setImageBitmap(vr_receta.get_foto())
+        if (vr_receta.v_favorito=="S") {
+            iv_Favorito.setImageResource(R.drawable.ic_corazon_lleno)
+        } else {
+            iv_Favorito.setImageResource(R.drawable.ic_corazon_vacio)
+        }
+        tv_descripcion.setText(vr_receta.v_descripcion)
+        et_Elaboracion.setText(vr_receta.v_elaboracion)
+        et_Ingredientes.setText(vr_receta.v_ingredientes)
+        et_Url.setText(vr_receta.v_url)
+
     }
+
+    override fun onClick(p0: View?) {
+        if (p0!!.id == R.id.etDet_Url) {
+            var v_url = et_Url.text.toString()
+            if (v_url != "" ) {
+                util.navega_url(requireActivity(), v_url)
+            } else {}
+        }
+    }
+
 }

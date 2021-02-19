@@ -80,12 +80,18 @@ class RecetasAdapter : BaseAdapter {
         }
         vh.btFavorito.setOnClickListener {
             val admin = AdminSQLite(view?.context, "recetas", null, rParam.VERSION_BD)
+            val v_campos = arrayOfNulls<String>(5)
+            var v_valores = arrayOfNulls<String>(5)
+            v_campos[0] = "descripcion"
+
             if (mReceta.v_favorito == "N") {
-                admin.actualizar(admin, "recetas", "favorito", "S", mReceta.v_id)
+                v_valores[0] = "S"
+                admin.actualizar(admin, "recetas", mReceta.v_id,v_campos, v_valores)
                 mReceta.v_favorito = "S"
                 vh.btFavorito.setImageResource(R.drawable.ic_corazon_lleno)
             } else {
-                admin.actualizar(admin, "recetas", "favorito", "N", mReceta.v_id)
+                v_valores[0] = "N"
+                admin.actualizar(admin, "recetas", mReceta.v_id, v_campos, v_valores)
                 mReceta.v_favorito = "N"
                 vh.btFavorito.setImageResource(R.drawable.ic_corazon_vacio)
             }
@@ -98,6 +104,7 @@ class RecetasAdapter : BaseAdapter {
         val bundle = Bundle()
         bundle.putInt("id_receta", p_receta.v_id)
         bundle.putString("descripcion_receta", p_receta.v_descripcion)
+        bundle.putString("favorito_receta", p_receta.v_favorito)
         intent.putExtras(bundle)
 
         p_context.startActivity(intent)
