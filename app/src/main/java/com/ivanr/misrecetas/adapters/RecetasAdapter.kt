@@ -82,7 +82,7 @@ class RecetasAdapter : BaseAdapter {
             val admin = AdminSQLite(view?.context, "recetas", null, rParam.VERSION_BD)
             val v_campos = arrayOfNulls<String>(5)
             var v_valores = arrayOfNulls<String>(5)
-            v_campos[0] = "descripcion"
+            v_campos[0] = "favorito"
 
             if (mReceta.v_favorito == "N") {
                 v_valores[0] = "S"

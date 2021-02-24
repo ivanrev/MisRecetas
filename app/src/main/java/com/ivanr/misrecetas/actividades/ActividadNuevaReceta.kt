@@ -23,7 +23,6 @@ class ActividadNuevaReceta : AppCompatActivity() {
     lateinit var etDescripcion: TextView
     lateinit var etElaboracion:TextView
     lateinit var etUrl:TextView
-    private val PHOTO_SELECTED = 0
     var vg_imagen: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +51,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode== RESULT_OK && requestCode == PHOTO_SELECTED) {
+        if (resultCode== RESULT_OK && requestCode == rParam.PHOTO_SELECTED) {
             val selectedImage = data!!.data
             findViewById<ImageView>(R.id.ivImagenReceta).setImageURI(selectedImage)
             vg_imagen = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage)
@@ -61,7 +60,7 @@ class ActividadNuevaReceta : AppCompatActivity() {
     fun seleccionarImagen() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*"
-        startActivityForResult(intent, PHOTO_SELECTED)
+        startActivityForResult(intent, rParam.PHOTO_SELECTED)
     }
 
     fun crearReceta () {

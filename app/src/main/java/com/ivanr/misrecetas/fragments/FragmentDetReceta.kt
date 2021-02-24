@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.ui.det_Receta.RecetaViewModel
@@ -23,12 +23,11 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
     private lateinit var vr_receta: Receta
     private lateinit var root: View
     private lateinit var recetaViewModel: RecetaViewModel
-    private lateinit var iv_imagen: ImageView
     private lateinit var iv_Favorito: ImageView
-    private lateinit var tv_descripcion: TextView
     private lateinit var et_Elaboracion: EditText
     private lateinit var et_Ingredientes: EditText
     private lateinit var et_Url: EditText
+    private lateinit var bt_boton:FloatingActionButton
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         recetaViewModel = ViewModelProvider(this).get(RecetaViewModel::class.java)
@@ -37,6 +36,9 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
         asocia_controles()
         recupera_parametros()
         inicializa_datos ()
+        bt_boton.setOnClickListener {
+            guardarCambios(vr_receta.v_id, vr_receta.v_descripcion!!, vr_receta.v_favorito!!)
+        }
         return root
     }
     companion object {
@@ -56,14 +58,12 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
     }
 
     fun asocia_controles () {
-        iv_imagen = root.findViewById(R.id.ivDet_ImagenReceta)
         iv_Favorito = root.findViewById(R.id.ivDet_Favorito)
-        tv_descripcion = root.findViewById(R.id.tvDet_DescripcionReceta)
         et_Elaboracion = root.findViewById(R.id.etDet_elaboracion)
         et_Ingredientes = root.findViewById(R.id.etDet_ingredientes)
         et_Url = root.findViewById(R.id.etDet_Url)
-
         et_Url.setOnClickListener(this)
+        bt_boton = root.findViewById(R.id.bt_det_guardar)
     }
 
     fun recupera_parametros () {
@@ -78,13 +78,11 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
         vr_receta = listaRecetas.first()
     }
     fun inicializa_datos () {
-        iv_imagen.setImageBitmap(vr_receta.get_foto())
         if (vr_receta.v_favorito=="S") {
             iv_Favorito.setImageResource(R.drawable.ic_corazon_lleno)
         } else {
             iv_Favorito.setImageResource(R.drawable.ic_corazon_vacio)
         }
-        tv_descripcion.setText(vr_receta.v_descripcion)
         et_Elaboracion.setText(vr_receta.v_elaboracion)
         et_Ingredientes.setText(vr_receta.v_ingredientes)
         et_Url.setText(vr_receta.v_url)
@@ -98,6 +96,30 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
                 util.navega_url(requireActivity(), v_url)
             } else {}
         }
+    }
+
+    fun guardarCambios (p_id_receta:Int, p_descripcion:String, p_favorito:String) {
+        var v_descripcion = p_descripcion
+        var v_favorito = p_favorito
+        var v_ingredientes = root.findViewById<EditText>(R.id.etDet_ingredientes).text.toString()
+        var v_elaboracion = root.findViewById<EditText>(R.id.etDet_elaboracion).text.toString()
+        var v_url = root.findViewById<EditText>(R.id.etDet_Url).text.toString()
+
+        val v_campos = arrayOfNulls<String>(5)
+        var v_valores = arrayOfNulls<String>(5)
+        v_campos[0] = "descripcion"
+        v_campos[1] = "elaboracion"
+        v_campos[2] = "ingredientes"
+        v_campos[3] = "url"
+        v_campos[4] = "favorito"
+        v_valores[0] = v_descripcion
+        v_valores[1] = v_elaboracion
+        v_valores[2] = v_ingredientes
+        v_valores[3] = v_url
+        v_valores[4] = v_favorito!!
+
+        val admin = AdminSQLite(activity, "recetas", null, rParam.VERSION_BD)
+        admin.actualizar(admin, "recetas", p_id_receta, v_campos, v_valores)
     }
 
 }

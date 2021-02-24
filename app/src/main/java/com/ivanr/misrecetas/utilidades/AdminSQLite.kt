@@ -7,6 +7,8 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Bitmap
 import android.util.Log
+import com.ivanr.misrecetas.clases.ImagenesReceta
+import com.ivanr.misrecetas.clases.Nota
 import com.ivanr.misrecetas.clases.Receta
 
 class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version) {
@@ -21,16 +23,17 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
                 " foto blob,\n" +
                 " url text,\n" +
                 " favorito text)")
-        db.execSQL("create table recetas_his(receta INTEGER PRIMARY KEY ,\n" +
-                " linea INTEGER PRIMARY KEY autoincrement ,\n" +
+        db.execSQL("create table recetas_his(receta integer ,\n" +
+                " linea integer ,\n" +
                 " fecha date,\n" +
                 " notas text,\n" +
-                " ingredientes text\n" +
+                " ingredientes text,\n" +
                 " elbaoracion text,\n" +
                 " foto blob)")
-        db.execSQL("create table recetas_img(receta INTEGER PRIMARY KEY ,\n" +
-                " linea INTEGER PRIMARY KEY autoincrement ,\n" +
-                " foto blob)")
+        db.execSQL("create table recetas_img(receta integer,\n" +
+                " linea integer,\n" +
+                " foto blob, \n"+
+                " linea_nota INTEGER)")
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
     }
@@ -64,8 +67,10 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
         if (p_campos_string.size > 0) {
             var vCont = 0
             for (campo in p_campos_string) {
-                receta.put(campo, p_valores_string[vCont])
-                vCont++
+                if (campo != null) {
+                    receta.put(campo, p_valores_string[vCont])
+                    vCont++
+                }
             }
             v_Actualizar = "S"
         }
@@ -106,4 +111,45 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
         return listaRecetas
     }
 
+    fun carga_lista_imagenes (fila: Cursor?):ArrayList<ImagenesReceta>{
+        var listaImagenes = ArrayList<ImagenesReceta>()
+        listaImagenes.clear()
+
+        if (fila!=null){
+            if (fila.moveToFirst()) {
+                do {
+                    val id_receta = fila.getInt(fila.getColumnIndex("receta"))
+                    val id_linea_nota = fila.getInt(fila.getColumnIndex("id_linea_nota"))
+                    val id_linea = fila.getInt(fila.getColumnIndex("id_linea"))
+                    var foto = fila.getBlob(fila.getColumnIndex("foto"))
+
+                    var foto_bm = util.array_to_img(foto)
+                    var v_Imagen_Receta = ImagenesReceta (id_receta, id_linea, id_linea_nota, foto_bm)
+                    listaImagenes.add(v_Imagen_Receta)
+
+                } while (fila.moveToNext() )
+            }
+        }
+        return listaImagenes
+    }
+
+    fun carga_lista_notas (fila: Cursor?):ArrayList<Nota> {
+        var listaNotas = ArrayList <Nota>()
+        listaNotas.clear()
+        if (fila!=null){
+            if (fila.moveToFirst()) {
+                do {
+                    val id_receta = fila.getInt(fila.getColumnIndex("receta"))
+                    val id_linea_nota = fila.getInt(fila.getColumnIndex("linea"))
+                    val fecha = fila.getString(fila.getColumnIndex("fecha"))
+                    var descripcion = fila.getString(fila.getColumnIndex("notas"))
+
+                    var v_Nota = Nota (id_receta, id_linea_nota, fecha, descripcion)
+                    listaNotas.add(v_Nota)
+
+                } while (fila.moveToNext() )
+            }
+        }
+        return listaNotas
+    }
 }
