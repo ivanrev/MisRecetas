@@ -1,18 +1,19 @@
 package com.ivanr.misrecetas.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ListView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ivanr.misrecetas.R
+import com.ivanr.misrecetas.actividades.ActividadNuevaReceta
 import com.ivanr.misrecetas.adapters.RecetasAdapter
-import com.ivanr.misrecetas.clases.Receta
 import com.ivanr.misrecetas.utilidades.AdminSQLite
 import com.ivanr.misrecetas.utilidades.Parametros
-import com.ivanr.misrecetas.utilidades.Utilidades
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +36,12 @@ class FragmentUltimas : Fragment() {
 
     override fun onCreateView( inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_ultimas, container, false)
+        var view = inflater.inflate(R.layout.fragment_main_ultimas, container, false)
+        val fab: FloatingActionButton = view.findViewById(R.id.bt_anadir_receta)
+        fab.setOnClickListener {
+            startActivity(Intent(view.context, ActividadNuevaReceta::class.java))
+        }
+
         lvRecetas = view.findViewById(R.id.lvRecetas)
         consultarRecetas(view.context)
 

@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="99dp"
         android:layout_weight="9"
-        android:divider="@android:drawable/divider_horizontal_textfield"
         android:orientation="vertical"
         android:showDividers="beginning|end">
 

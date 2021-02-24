@@ -23,7 +23,7 @@ class ImagenesAdapter:BaseAdapter {
         val vh: ViewHolder
         var cl_imagen = imagenesList[position]
         if (convertView == null) {
-            view = LayoutInflater.from(this.context).inflate(R.layout.imagenes, parent, false)
+            view = LayoutInflater.from(this.context).inflate(R.layout.list_imagenes, parent, false)
             vh = ViewHolder(view)
             view.tag = vh
         } else {
@@ -31,7 +31,6 @@ class ImagenesAdapter:BaseAdapter {
             vh = view.tag as ViewHolder
         }
         vh.ivImagen.setImageBitmap(cl_imagen.v_foto)
-        asignaAcciones(vh, view, imagenesList, cl_imagen)
 
         return view
     }
@@ -43,9 +42,6 @@ class ImagenesAdapter:BaseAdapter {
     }
     override fun getCount(): Int {
         return imagenesList.size
-    }
-
-    fun asignaAcciones(vh: ViewHolder, view: View?, recetasList: ArrayList<ImagenesReceta>, mReceta: ImagenesReceta) {
     }
 
     class ViewHolder(view: View?) {

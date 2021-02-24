@@ -33,7 +33,7 @@ class FragmentFavoritos : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        var view = inflater.inflate(R.layout.fragment_ultimas, container, false)
+        var view = inflater.inflate(R.layout.fragment_main_ultimas, container, false)
         lvRecetas = view.findViewById(R.id.lvRecetas)
         consultarRecetas(view.context)
 

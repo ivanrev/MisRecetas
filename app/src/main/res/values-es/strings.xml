@@ -11,7 +11,7 @@
     <string name="ingredientes">Ingredientes Receta</string>
     <string name="sel_Imagen">Seleccionar Imagen</string>
     <string name="title_activity_main">Mis Recetas</string>
-    <string name="tab_text_1">Últimas Recetas</string>
+    <string name="tab_text_1">Recetas</string>
     <string name="tab_text_2">Favoritos</string>
     <string name="tab_text_3">Categorias</string>
     <string name="titulo_det_receta">Receta</string>
@@ -19,4 +19,9 @@
     <string name="titulo_det_imagenes">Imagenes</string>
     <string name="title_activity_actividad_detalle_receta">Detalle Receta</string>
     <string name="title_activity_actividad_detalle">ActividadDetalle</string>
+    <string name="navigation_drawer_open">Abrir drawer navigation</string>
+    <string name="navigation_drawer_close">Cerrar navigation drawer</string>
+    <string name="nav_header_title">Mis Recetas</string>
+    <string name="nav_header_subtitle"></string>
+    <string name="nav_header_desc">Navigation header</string>
 </resources>

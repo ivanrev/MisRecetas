@@ -12,12 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MisRecetas">
         <activity
-            android:name=".actividades.ActividadDetalle"
-            android:label="@string/title_activity_actividad_detalle"
-            android:theme="@style/Theme.MisRecetas.NoActionBar"></activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
+            android:name=".MainActivity2"
+            android:label="@string/app_name"
             android:theme="@style/Theme.MisRecetas.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".actividades.ActividadDetalle"
+            android:label="@string/title_activity_actividad_detalle"
+            android:theme="@style/Theme.MisRecetas.NoActionBar" />
         <activity android:name=".actividades.ActividadNuevaReceta" />
-
     </application>
 
 </manifest>

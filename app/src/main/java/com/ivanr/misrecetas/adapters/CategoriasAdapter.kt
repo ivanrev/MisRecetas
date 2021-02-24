@@ -5,25 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.EditText
 import android.widget.TextView
 import com.ivanr.misrecetas.R
-import com.ivanr.misrecetas.clases.ImagenesReceta
-import com.ivanr.misrecetas.clases.Nota
+import com.ivanr.misrecetas.clases.Categoria
 
-class NotasAdapter: BaseAdapter {
-    private var notasList = ArrayList<Nota>()
+class CategoriasAdapter: BaseAdapter {
+    private var categoriasList = ArrayList<Categoria>()
     private var context: Context?
 
-    constructor(context: Context?, notasList: ArrayList<Nota>) : super() {
-        this.notasList = notasList
+    constructor(context: Context?, notasList: ArrayList<Categoria>) : super() {
+        this.categoriasList = notasList
         this.context = context
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         val view: View?
         val vh: ViewHolder
-        var cl_nota = notasList[position]
+        var cl_nota = categoriasList[position]
         if (convertView == null) {
             view = LayoutInflater.from(this.context).inflate(R.layout.list_notas, parent, false)
             vh = ViewHolder(view)
@@ -32,14 +30,13 @@ class NotasAdapter: BaseAdapter {
             view = convertView
             vh = view.tag as ViewHolder
         }
-        vh.et_nota_fecha.setText(cl_nota.v_fecha.toString())
-        vh.tv_nota_descripcion.setText(cl_nota.v_descripcion)
+        vh.tv_categoria_descripcion.setText(cl_nota.descripcion)
 
         return view
     }
 
     override fun getItem(position: Int): Any {
-        return notasList[position]
+        return categoriasList[position]
     }
 
     override fun getItemId(position: Int): Long {
@@ -47,15 +44,13 @@ class NotasAdapter: BaseAdapter {
     }
 
     override fun getCount(): Int {
-        return notasList.size
+        return categoriasList.size
     }
 
     class ViewHolder(view: View?) {
-        val et_nota_fecha: EditText
-        val tv_nota_descripcion: TextView
+        val tv_categoria_descripcion: TextView
         init {
-            this.et_nota_fecha = view!!.findViewById(R.id.et_nota_fecha)
-            this.tv_nota_descripcion = view.findViewById(R.id.tv_nota_descripcion)
+            this.tv_categoria_descripcion = view!!.findViewById(R.id.tv_categoria_descripcion)
         }
     }
 }

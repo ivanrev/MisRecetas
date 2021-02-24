@@ -35,7 +35,7 @@ class RecetasAdapter : BaseAdapter {
         var mReceta = recetasList[position]
 
         if (convertView == null) {
-            view = LayoutInflater.from(this.context).inflate(R.layout.receta, parent, false)
+            view = LayoutInflater.from(this.context).inflate(R.layout.list_recetas, parent, false)
             vh = ViewHolder(view)
             view.tag = vh
         } else {

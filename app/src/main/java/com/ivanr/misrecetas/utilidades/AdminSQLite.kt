@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Bitmap
 import android.util.Log
+import com.ivanr.misrecetas.clases.Categoria
 import com.ivanr.misrecetas.clases.ImagenesReceta
 import com.ivanr.misrecetas.clases.Nota
 import com.ivanr.misrecetas.clases.Receta
@@ -34,10 +35,18 @@ class AdminSQLite(context: Context?, name: String, factory: SQLiteDatabase.Curso
                 " linea integer,\n" +
                 " foto blob, \n"+
                 " linea_nota INTEGER)")
+        db.execSQL("create table recetas_cat (codigo integer primary key autoincrement, \n" +
+                " descripcion text)")
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
     }
-
+    fun creaCategoria (p_admin: AdminSQLite, pcl_categoria: Categoria) {
+        val bd = p_admin.writableDatabase
+        val categoria = ContentValues ()
+        categoria.put ("descripcion", pcl_categoria.descripcion)
+        bd.insert ("categorias", null, categoria)
+        bd.close ()
+    }
     fun creaReceta(p_admin: AdminSQLite, p_descripcion: String, p_elaboracion: String, p_url: String, p_foto: Bitmap?, p_favorito: String) {
         val bd = p_admin.writableDatabase
         val receta = ContentValues()

@@ -13,6 +13,7 @@ import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import com.ivanr.misrecetas.clases.Receta
 import java.io.*
@@ -28,6 +29,9 @@ object Utilidades {
         }
     }
 
+    fun mensaje_nuevo(view: View, p_mensaje: String) {
+        Snackbar.make(view, p_mensaje, Snackbar.LENGTH_LONG).setAction("Action", null).show()
+    }
     fun mensaje(context: Context?, txt: String?) {
         //Toast toast2 = Toast.makeText(getApplicationContext(), "Toast con gravity", Toast.LENGTH_SHORT);
         val toast2 = Toast.makeText(context, txt, Toast.LENGTH_SHORT)
