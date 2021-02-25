@@ -14,9 +14,12 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.ivanr.misrecetas.actividades.ActividadNuevaReceta
+import com.ivanr.misrecetas.clases.Categoria
+import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.utilidades.Parametros
 
 class MainActivity2 : AppCompatActivity() {
-
+    private val rParam = Parametros
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +37,9 @@ class MainActivity2 : AppCompatActivity() {
                 R.id.nav_ultimas, R.id.nav_favoritas, R.id.nav_categorias), drawerLayout)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        val admin = AdminSQLite(this, "recetas", null, rParam.VERSION_BD)
+        admin.actualiza_bd(admin)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

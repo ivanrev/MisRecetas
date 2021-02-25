@@ -2,20 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_categoria_descripcion"
-            android:layout_width="296dp"
-            android:layout_height="39dp"
+
+        <ImageView
+            android:id="@+id/iv_categoria_foto"
+            android:layout_width="250dp"
+            android:layout_height="125dp"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/ic_imagen_vacio"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_categoria_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/categoria"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintBottom_toBottomOf="@id/iv_categoria_foto"
+            app:layout_constraintEnd_toEndOf="@id/iv_categoria_foto"
+            app:layout_constraintStart_toStartOf="@id/iv_categoria_foto"
+            app:layout_constraintTop_toTopOf="@id/iv_categoria_foto" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

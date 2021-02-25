@@ -26,5 +26,6 @@
     <string name="nav_header_title">My Recipes</string>
     <string name="nav_header_subtitle"></string>
     <string name="nav_header_desc">Navigation header</string>
+    <string name="categoria">Categorie</string>
 
 </resources>
