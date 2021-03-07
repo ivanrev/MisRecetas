@@ -51,14 +51,13 @@ class FragmentFavoritos : Fragment(), OnClick_ListReceta_Listener {
 
     fun consultarRecetas (p_context: Context) {
         val admin = AdminSQLite(p_context, "recetas", null, rParam.VERSION_BD)
-        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto from recetas where favorito = 'S' order by codigo desc")
+        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto, categoria, maquina_cocinado from recetas where favorito = 'S' order by codigo desc")
         var listaRecetas = admin.carga_lista_recetas (fila, 999)
         recetasAdapter = RecetasAdapter(listaRecetas, this)
         lvRecetas_rec.adapter = recetasAdapter
     }
 
     override fun onClick_listRecetas(receta: Receta, position: Int, p_accion: String) {
-        TODO("Not yet implemented")
     }
 
 }

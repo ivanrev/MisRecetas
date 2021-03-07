@@ -19,6 +19,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <EditText
+                    android:id="@+id/etDet_descripcion"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="textPersonName"
+                    app:layout_constraintEnd_toStartOf="@+id/ivDet_Favorito"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
                     android:id="@+id/ivDet_Favorito"
                     android:layout_width="40dp"

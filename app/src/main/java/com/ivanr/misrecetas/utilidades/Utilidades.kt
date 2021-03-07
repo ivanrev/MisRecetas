@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Vibrator
+import android.provider.MediaStore
 import android.text.Html
 import android.view.Gravity
 import android.view.View
@@ -61,6 +62,13 @@ object Utilidades {
         mail.putExtra(Intent.EXTRA_SUBJECT, p_asunto)
         mail.putExtra(Intent.EXTRA_TEXT, Html.fromHtml(StringBuilder().append(p_cuerpo_mail).toString()))
         context.startActivity(mail)
+    }
+
+    fun getImageUriFromBitmap(context: Context, bitmap: Bitmap): Uri{
+        val bytes = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
+        val path = MediaStore.Images.Media.insertImage(context.contentResolver, bitmap, "Title", null)
+        return Uri.parse(path.toString())
     }
 
     fun img_to_array(bitmap: Bitmap?): ByteArray {

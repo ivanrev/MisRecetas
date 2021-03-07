@@ -42,12 +42,13 @@ class FragmentUltimas : Fragment(), OnClick_ListReceta_Listener {
         fab.setOnClickListener {
             startActivity(Intent(view.context, ActividadNuevaReceta::class.java))
         }
-
-        consultarRecetas(view.context)
-
         return view
     }
 
+    override fun onResume() {
+        super.onResume()
+        consultarRecetas(view!!.context)
+    }
     companion object {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
@@ -65,41 +66,6 @@ class FragmentUltimas : Fragment(), OnClick_ListReceta_Listener {
     }
 
     override fun onClick_listRecetas(receta: Receta, position: Int, p_accion:String) {
-        if (p_accion == "navegar") {
-            navegar_detalle(receta)
-        }
-        else if (p_accion=="favorito") {
-            actualiza_favorito(receta)
-        }
-    }
-
-    fun actualiza_favorito (receta:Receta) {
-        val admin = AdminSQLite(view?.context, "recetas", null, rParam.VERSION_BD)
-        val v_campos = arrayOfNulls<String>(5)
-        var v_valores = arrayOfNulls<String>(5)
-        v_campos[0] = "favorito"
-
-        if (receta.v_favorito == "N") {
-            v_valores[0] = "S"
-            admin.actualizar(admin, "recetas", receta.v_id,v_campos, v_valores)
-            receta.v_favorito = "S"
-            //vh.btFavorito.setImageResource(R.drawable.ic_corazon_lleno)
-        } else {
-            v_valores[0] = "N"
-            admin.actualizar(admin, "recetas", receta.v_id, v_campos, v_valores)
-            receta.v_favorito = "N"
-            //vh.btFavorito.setImageResource(R.drawable.ic_corazon_vacio)
-        }
-        lvRecetas_rec.adapter!!.notifyDataSetChanged()
-    }
-    fun navegar_detalle(p_receta: Receta) {
-        val intent = Intent(activity, ActividadDetalle::class.java)
-        val bundle = Bundle()
-        bundle.putInt("id_receta", p_receta.v_id)
-        bundle.putString("descripcion_receta", p_receta.v_descripcion)
-        bundle.putString("favorito_receta", p_receta.v_favorito)
-        intent.putExtras(bundle)
-        requireActivity().startActivity(intent)
     }
 
 }

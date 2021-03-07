@@ -90,8 +90,9 @@ class ActividadNuevaReceta : AppCompatActivity(), AdapterView.OnItemSelectedList
                                 vg_imagen, "N", cl_categoria_sel?.id, "")
         util.mensaje_nuevo(binding.root.rootView, "Receta guardada correctamente")
         //Volvemos atras y actualizarmos los datos al crear el MainActivity
-        val intent = Intent(this, MainActivity2::class.java)
-        startActivity(intent)
+        //val intent = Intent(this, MainActivity2::class.java)
+        //startActivity(intent)
+        onBackPressed()
     }
 
 }
