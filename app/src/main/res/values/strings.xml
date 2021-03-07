@@ -29,5 +29,7 @@
     <string name="MaquinaCocinado">Cooked Machine</string>
     <string name="fecha">Date</string>
     <string name="notas">Notes</string>
+    <string name="fechanota">Date Note</string>
+    <string name="descripcionnota">Description Note</string>
 
 </resources>

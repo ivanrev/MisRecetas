@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/margen8"
+    android:layout_marginTop="@dimen/margen8"
+    android:layout_marginRight="@dimen/margen8"
+    android:layout_marginBottom="@dimen/margen8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/et_nota_fecha"
-            android:layout_width="95dp"
-            android:layout_height="48dp"
-            android:ems="10"
-            android:inputType="date"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <TextView
+            android:id="@+id/tv_nota_fecha"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/fechanota"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tv_nota_descripcion"
-            android:layout_width="296dp"
-            android:layout_height="39dp"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:text="@string/descripcionnota"
+            android:layout_marginStart="@dimen/margen8"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/et_nota_fecha"
+            app:layout_constraintStart_toEndOf="@+id/tv_nota_fecha"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</LinearLayout>
+</com.google.android.material.card.MaterialCardView>
+

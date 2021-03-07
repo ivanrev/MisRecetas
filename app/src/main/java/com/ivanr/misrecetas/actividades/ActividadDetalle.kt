@@ -34,13 +34,10 @@ class ActividadDetalle : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetalleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         val sectionsPagerAdapter = SectionsAdapterDet(this, supportFragmentManager)
         binding.viewPagerDet.adapter = sectionsPagerAdapter
         binding.tabsDet.setupWithViewPager(binding.viewPagerDet)
-
         cargar_parametros()
-
         binding.ibDetAtras.setOnClickListener { onBackPressed() }
         binding.ibDetBorrar.setOnClickListener {
             val admin = AdminSQLite(this, "recetas", null, rParam.VERSION_BD)
@@ -48,7 +45,6 @@ class ActividadDetalle : AppCompatActivity() {
             onBackPressed()
         }
         binding.ibDetCompartir.setOnClickListener {compartir()}
-
         binding.tvDetTitulo.setText(vr_receta.v_descripcion)
         binding.ivDetImagen.setImageBitmap(vr_receta.get_foto())
     }
@@ -66,7 +62,6 @@ class ActividadDetalle : AppCompatActivity() {
         vr_receta = listaRecetas.first()
 
     }
-
     fun compartir () {
         val intent_compartir = Intent(Intent.ACTION_SEND)
         intent_compartir.type = "image/*"
@@ -78,6 +73,4 @@ class ActividadDetalle : AppCompatActivity() {
         startActivity(Intent.createChooser(intent_compartir, binding.tvDetTitulo.text.toString()))
 
     }
-
-
 }

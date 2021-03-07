@@ -28,4 +28,6 @@
     <string name="MaquinaCocinado">Maquina Cocinado</string>
     <string name="fecha">Fecha</string>
     <string name="notas">Notas</string>
+    <string name="fechanota">Fecha Nota</string>
+    <string name="descripcionnota">Descripcion Noae</string>
 </resources>

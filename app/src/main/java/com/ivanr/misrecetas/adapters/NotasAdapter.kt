@@ -5,10 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.EditText
 import android.widget.TextView
 import com.ivanr.misrecetas.R
-import com.ivanr.misrecetas.clases.ImagenesReceta
 import com.ivanr.misrecetas.clases.Nota
 
 class NotasAdapter: BaseAdapter {
@@ -32,7 +30,7 @@ class NotasAdapter: BaseAdapter {
             view = convertView
             vh = view.tag as ViewHolder
         }
-        vh.et_nota_fecha.setText(cl_nota.v_fecha.toString())
+        vh.tv_nota_fecha.setText(cl_nota.v_fecha.toString())
         vh.tv_nota_descripcion.setText(cl_nota.v_descripcion)
 
         return view
@@ -51,10 +49,10 @@ class NotasAdapter: BaseAdapter {
     }
 
     class ViewHolder(view: View?) {
-        val et_nota_fecha: EditText
+        val tv_nota_fecha: TextView
         val tv_nota_descripcion: TextView
         init {
-            this.et_nota_fecha = view!!.findViewById(R.id.et_nota_fecha)
+            this.tv_nota_fecha = view!!.findViewById(R.id.tv_nota_fecha)
             this.tv_nota_descripcion = view.findViewById(R.id.tv_nota_descripcion)
         }
     }
