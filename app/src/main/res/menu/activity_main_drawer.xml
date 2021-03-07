@@ -7,14 +7,18 @@
         <item
             android:id="@+id/nav_ultimas"
             android:icon="@drawable/ic_menu_camera"
-            android:title="@string/tab_text_1" />
+            android:title="@string/Recetas" />
         <item
             android:id="@+id/nav_favoritas"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/tab_text_2" />
+            android:title="@string/Favoritos" />
         <item
             android:id="@+id/nav_categorias"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/tab_text_3" />
+            android:title="@string/Categorias" />
+        <item
+            android:id="@+id/nav_tipos_elaboracion"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/MaquinaCocinado" />
     </group>
 </menu>

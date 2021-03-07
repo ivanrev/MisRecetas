@@ -1,70 +1,61 @@
 package com.ivanr.misrecetas.adapters
 
-import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.ivanr.misrecetas.R
-import com.ivanr.misrecetas.actividades.ActividadDetalle
 import com.ivanr.misrecetas.clases.Receta
-import com.ivanr.misrecetas.utilidades.AdminSQLite
+import com.ivanr.misrecetas.databinding.ListRecetasBinding
+import com.ivanr.misrecetas.listener.OnClick_ListReceta_Listener
 import com.ivanr.misrecetas.utilidades.Parametros
 import com.ivanr.misrecetas.utilidades.Utilidades
 
 
-class RecetasAdapter : BaseAdapter {
+class RecetasAdapter (private val recetasList: ArrayList<Receta>, private val listener: OnClick_ListReceta_Listener) : RecyclerView.Adapter<RecetasAdapter.ViewHolder>() {
     private val util = Utilidades
     private val rParam = Parametros
-    private var recetasList = ArrayList<Receta>()
-    private var context: Context?
 
-    constructor(context: Context, recetasList: ArrayList<Receta>) : super() {
-        this.recetasList = recetasList
-        this.context = context
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecetasAdapter.ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_recetas, parent, false)
+        return ViewHolder(view)
     }
+    override fun onBindViewHolder(holder: RecetasAdapter.ViewHolder, position: Int) {
+        val cl_receta = recetasList[position]
+        with(holder) {
+            holder.bindHolder.tvDescripcion.text = cl_receta.v_descripcion
+            holder.bindHolder.tvIndicaciones.text = cl_receta.v_elaboracion
+            if (cl_receta.v_favorito == "S") {
+                holder.bindHolder.btFavorito.setImageResource(R.drawable.ic_corazon_lleno)
+            } else {
+                holder.bindHolder.btFavorito.setImageResource(R.drawable.ic_corazon_vacio)
+            }
+            if (cl_receta.v_foto != null) {
+                holder.bindHolder.ivReceta.setImageBitmap(cl_receta.v_foto)
+            }
+            else {
+                holder.bindHolder.ivReceta.setImageResource(R.drawable.ic_imagen_vacio)
+            }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val view: View?
-        val vh: ViewHolder
-        var mReceta = recetasList[position]
-
-        if (convertView == null) {
-            view = LayoutInflater.from(this.context).inflate(R.layout.list_recetas, parent, false)
-            vh = ViewHolder(view)
-            view.tag = vh
-        } else {
-            view = convertView
-            vh = view.tag as ViewHolder
+            setListener(cl_receta, position)
         }
+    }
 
-        vh.tvDescripcion.text = mReceta.v_descripcion
-        vh.tvIndicaciones.text = mReceta.v_elaboracion
-        if (mReceta.v_favorito == "S") {
-            vh.btFavorito.setImageResource(R.drawable.ic_corazon_lleno)
-        } else {
-            vh.btFavorito.setImageResource(R.drawable.ic_corazon_vacio)
+    override fun getItemCount(): Int = recetasList.size
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val bindHolder = ListRecetasBinding.bind (view)
+
+        fun setListener (receta: Receta, position: Int) {
+            bindHolder.ivReceta.setOnClickListener {listener.onClick_listRecetas(receta, position, "ampliar_imagem")}
+            bindHolder.tvDescripcion.setOnClickListener {listener.onClick_listRecetas(receta, position, "navegar")}
+            bindHolder.tvIndicaciones.setOnClickListener {listener.onClick_listRecetas(receta, position, "navegar")}
+            bindHolder.btFavorito.setOnClickListener {listener.onClick_listRecetas(receta, position, "favorito")}
+            bindHolder.root.setOnClickListener {
+                listener.onClick_listRecetas(receta, position, "navegar") }
         }
-        vh.ivImagen.setImageBitmap(mReceta.v_foto)
-        asignaAcciones(vh, view, recetasList, mReceta)
-
-        return view
     }
-    override fun getItem(position: Int): Any {
-        return recetasList[position]
-    }
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-    override fun getCount(): Int {
-        return recetasList.size
-    }
-
+/*
     fun asignaAcciones(vh: ViewHolder, view: View?, recetasList: ArrayList<Receta>, mReceta: Receta) {
         vh.tvDescripcion.setOnClickListener {
             navegar_detalle(view?.context!!, mReceta)
@@ -98,30 +89,5 @@ class RecetasAdapter : BaseAdapter {
             notifyDataSetChanged()
         }
     }
-
-    fun navegar_detalle(p_context: Context, p_receta: Receta) {
-        val intent = Intent(p_context, ActividadDetalle::class.java)
-        val bundle = Bundle()
-        bundle.putInt("id_receta", p_receta.v_id)
-        bundle.putString("descripcion_receta", p_receta.v_descripcion)
-        bundle.putString("favorito_receta", p_receta.v_favorito)
-        intent.putExtras(bundle)
-
-        p_context.startActivity(intent)
-    }
-
-    class ViewHolder(view: View?) {
-        val tvDescripcion: TextView
-        val tvIndicaciones: TextView
-        val btFavorito: ImageButton
-        val btBorrar: ImageButton
-        val ivImagen: ImageView
-        init {
-            this.tvDescripcion = view?.findViewById(R.id.tvDescripcion) as TextView
-            this.tvIndicaciones = view.findViewById(R.id.tvIndicaciones) as TextView
-            this.btFavorito = view.findViewById(R.id.btFavorito)
-            this.btBorrar = view.findViewById(R.id.btBorrar)
-            this.ivImagen = view.findViewById(R.id.iv_Receta)
-        }
-    }
+*/
 }

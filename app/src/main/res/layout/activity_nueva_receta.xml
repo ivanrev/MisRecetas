@@ -1,104 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/etDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:autofillHints=""
-            android:ems="10"
-            android:hint="@string/descripcio_n_receta"
-            android:inputType="textPersonName"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            tools:ignore="MissingConstraints" />
-
-        <EditText
-            android:id="@+id/etIngredientes"
-            android:layout_width="match_parent"
-            android:layout_height="179dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/ingredientes"
-            android:inputType="textMultiLine"
-            android:singleLine="false" />
-
-        <EditText
-            android:id="@+id/etIndicaciones"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:autofillHints=""
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="@string/elaboracion_receta"
-            android:inputType="textMultiLine"
-            android:singleLine="false"
-            tools:ignore="MissingConstraints" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="350dp">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/etUrl"
-                android:layout_width="317dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autofillHints=""
-                android:ems="10"
-                android:hint="@string/url_receta"
-                android:inputType="textUri|text"
-                tools:ignore="MissingConstraints" />
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/ib_ir_url"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/buscar" />
+                <EditText
+                    android:id="@+id/etDescripcion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/descripcio_n_receta"
+                    android:inputType="textPersonName"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/ivImagenReceta"
-                android:layout_width="200dp"
-                android:layout_height="100dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_imagen_vacio" />
-
-            <Button
-                android:id="@+id/btSeImagen"
-                android:layout_width="156dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:text="@string/sel_Imagen" />
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
 
+                <EditText
+                    android:id="@+id/etIngredientes"
+                    android:layout_width="match_parent"
+                    android:layout_height="179dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/ingredientes"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etIndicaciones"
+                    android:layout_width="match_parent"
+                    android:layout_height="157dp"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="@string/elaboracion_receta"
+                    android:inputType="textMultiLine"
+                    android:singleLine="false"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etUrl"
+                    style="@style/Widget.MaterialComponents.TextView"
+                    android:layout_width="317dp"
+                    android:layout_height="wrap_content"
+                    android:autofillHints=""
+                    android:ems="10"
+                    android:hint="@string/url_receta"
+                    android:inputType="textUri|text"
+                    android:textStyle="italic"
+                    tools:ignore="MissingConstraints" />
+
+                <ImageButton
+                    android:id="@+id/ib_ir_url"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/buscar" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/ivImagenReceta"
+                    android:layout_width="200dp"
+                    android:layout_height="75dp"
+                    android:layout_weight="1"
+                    app:srcCompat="@drawable/ic_imagen_vacio" />
+
+                <Button
+                    android:id="@+id/btSeImagen"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="150dp"
+                    android:layout_height="75dp"
+                    android:text="@string/sel_Imagen"
+                    android:textAlignment="center" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/categoria"
+                    android:textAlignment="center"></com.google.android.material.textview.MaterialTextView>
+
+                <Spinner
+                    android:id="@+id/spCategorias"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/MaquinaCocinado"
+                    android:textAlignment="center"></com.google.android.material.textview.MaterialTextView>
+
+                <Spinner
+                    android:id="@+id/spMaquinas"
+                    style="@android:style/Widget.Holo.Light.Spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
         </LinearLayout>
-
-        <Spinner
-            android:id="@+id/spCategorias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
+    </ScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bt_Crear_Receta"

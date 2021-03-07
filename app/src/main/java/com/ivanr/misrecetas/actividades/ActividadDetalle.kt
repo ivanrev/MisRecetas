@@ -7,7 +7,6 @@ import com.google.android.material.tabs.TabLayout
 import androidx.viewpager.widget.ViewPager
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.ui.det.SectionsAdapterDet
 import com.ivanr.misrecetas.utilidades.AdminSQLite
@@ -18,7 +17,7 @@ class ActividadDetalle : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_actividad_detalle)
+        setContentView(R.layout.activity_detalle)
         val sectionsPagerAdapter = SectionsAdapterDet(this, supportFragmentManager)
         val viewPager: ViewPager = findViewById(R.id.view_pager_det)
         viewPager.adapter = sectionsPagerAdapter
@@ -35,7 +34,10 @@ class ActividadDetalle : AppCompatActivity() {
         findViewById<ImageButton>(R.id.ibDet_borrar).setOnClickListener {}*/
 
         val admin = AdminSQLite(this, "recetas", null, rParam.VERSION_BD)
-        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto from recetas where codigo = " + v_id_receta + " order by codigo desc")
+        var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, "+
+                                                        " foto, categoria, maquina_cocinado "+
+                                                " from recetas where codigo = " + v_id_receta +
+                                                " order by codigo desc")
         var listaRecetas = admin.carga_lista_recetas(fila, 1)
         var vr_receta = listaRecetas.first()
 

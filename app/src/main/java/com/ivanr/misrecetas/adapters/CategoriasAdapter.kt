@@ -27,7 +27,7 @@ class CategoriasAdapter(private val values: ArrayList<Categoria>) : RecyclerView
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val tv_categoria_descripcion: TextView = view?.findViewById(R.id.tv_categoria_descripcion)
+        val tv_categoria_descripcion: TextView = view.findViewById(R.id.tv_categoria_descripcion)
         val iv_categoria_foto: ImageView = view.findViewById(R.id.iv_categoria_foto)
 
         override fun toString(): String {

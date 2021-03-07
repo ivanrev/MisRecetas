@@ -11,9 +11,9 @@
     <string name="ingredientes">Ingredientes Receta</string>
     <string name="sel_Imagen">Seleccionar Imagen</string>
     <string name="title_activity_main">Mis Recetas</string>
-    <string name="tab_text_1">Recetas</string>
-    <string name="tab_text_2">Favoritos</string>
-    <string name="tab_text_3">Categorias</string>
+    <string name="Recetas">Recetas</string>
+    <string name="Favoritos">Favoritos</string>
+    <string name="Categorias">Categorias</string>
     <string name="titulo_det_receta">Receta</string>
     <string name="titulo_det_notas">Notas</string>
     <string name="titulo_det_imagenes">Imagenes</string>
@@ -25,4 +25,7 @@
     <string name="nav_header_subtitle"></string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="categoria">Categoria</string>
+    <string name="MaquinaCocinado">Maquina Cocinado</string>
+    <string name="fecha">Fecha</string>
+    <string name="notas">Notas</string>
 </resources>

@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.ivanr.misrecetas.actividades.ActividadNuevaReceta
 import com.ivanr.misrecetas.clases.Categoria
+import com.ivanr.misrecetas.databinding.ActivityMain2Binding
 import com.ivanr.misrecetas.utilidades.AdminSQLite
 import com.ivanr.misrecetas.utilidades.Parametros
 

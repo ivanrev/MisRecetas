@@ -6,25 +6,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListView
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.adapters.RecetasAdapter
+import com.ivanr.misrecetas.clases.Receta
+import com.ivanr.misrecetas.listener.OnClick_ListReceta_Listener
 import com.ivanr.misrecetas.utilidades.AdminSQLite
 import com.ivanr.misrecetas.utilidades.Parametros
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FragmentFavoritos.newInstance] factory method to
- * create an instance of this fragment.
- */
-class FragmentFavoritos : Fragment() {
+class FragmentFavoritos : Fragment(), OnClick_ListReceta_Listener {
+    private var columnCount = 1
     private val rParam = Parametros
-    lateinit var lvRecetas : ListView
+    private lateinit var lvRecetas_rec: RecyclerView
     lateinit var recetasAdapter: RecetasAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,21 +29,17 @@ class FragmentFavoritos : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         var view = inflater.inflate(R.layout.fragment_main_ultimas, container, false)
-        lvRecetas = view.findViewById(R.id.lvRecetas)
+        lvRecetas_rec = view.findViewById(R.id.recycler_recetas)
+        lvRecetas_rec.layoutManager = when {
+            columnCount <= 1 -> LinearLayoutManager(context)
+            else -> GridLayoutManager(context, columnCount)
+        }
         consultarRecetas(view.context)
 
         return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment FragmentFavoritos.
-         */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance() =
@@ -62,7 +53,12 @@ class FragmentFavoritos : Fragment() {
         val admin = AdminSQLite(p_context, "recetas", null, rParam.VERSION_BD)
         var fila = admin.consultar(admin, "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto from recetas where favorito = 'S' order by codigo desc")
         var listaRecetas = admin.carga_lista_recetas (fila, 999)
-        recetasAdapter = RecetasAdapter(p_context, listaRecetas)
-        lvRecetas.adapter = recetasAdapter
+        recetasAdapter = RecetasAdapter(listaRecetas, this)
+        lvRecetas_rec.adapter = recetasAdapter
     }
+
+    override fun onClick_listRecetas(receta: Receta, position: Int, p_accion: String) {
+        TODO("Not yet implemented")
+    }
+
 }

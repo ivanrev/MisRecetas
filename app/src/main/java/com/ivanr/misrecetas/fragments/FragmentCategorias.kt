@@ -34,7 +34,7 @@ class FragmentCategorias : Fragment() {
             columnCount <= 1 -> LinearLayoutManager(context)
             else -> GridLayoutManager(context, columnCount)
         }
-        consultarCategorias (root.context, recycler)
+        consultarCategorias (recycler)
 
         val fab: FloatingActionButton = root.findViewById(R.id.bt_anadir_categoria)
         fab.setOnClickListener {
@@ -43,9 +43,9 @@ class FragmentCategorias : Fragment() {
         return root
     }
 
-    fun consultarCategorias (p_context: Context, recycler:RecyclerView) {
+    fun consultarCategorias (recycler:RecyclerView) {
         val admin = AdminSQLite(context, "recetas", null, rParam.VERSION_BD)
-        var fila = admin.consultar(admin, "select codigo, orden, descripcion, foto from recetas_cat order by orden desc")
+        var fila = admin.consultar(admin, "select codigo, orden, descripcion, foto from categorias order by orden desc")
         var listaCategorias = admin.carga_lista_categorias (fila)
         categoriasAdapter = CategoriasAdapter(listaCategorias)
         recycler.adapter = categoriasAdapter

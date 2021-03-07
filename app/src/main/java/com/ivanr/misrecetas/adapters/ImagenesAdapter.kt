@@ -1,53 +1,42 @@
 package com.ivanr.misrecetas.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.ImageView
+import androidx.recyclerview.widget.RecyclerView
 import com.ivanr.misrecetas.R
 import com.ivanr.misrecetas.clases.ImagenesReceta
+import com.ivanr.misrecetas.databinding.ListImagenesBinding
+import com.ivanr.misrecetas.listener.OnClick_DetImagen_Listener
 
-class ImagenesAdapter:BaseAdapter {
-    private var imagenesList = ArrayList<ImagenesReceta>()
-    private var context: Context?
+class ImagenesAdapter(private val values: ArrayList<ImagenesReceta>, private val detImagenListener: OnClick_DetImagen_Listener)
+    : RecyclerView.Adapter<ImagenesAdapter.ViewHolder>() {
 
-    constructor(context: Context?, recetasList: ArrayList<ImagenesReceta>) : super() {
-        this.imagenesList = recetasList
-        this.context = context
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.list_imagenes, parent, false)
+        return ViewHolder(view)
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
-        val view: View?
-        val vh: ViewHolder
-        var cl_imagen = imagenesList[position]
-        if (convertView == null) {
-            view = LayoutInflater.from(this.context).inflate(R.layout.list_imagenes, parent, false)
-            vh = ViewHolder(view)
-            view.tag = vh
-        } else {
-            view = convertView
-            vh = view.tag as ViewHolder
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val imagen = values[position]
+        with(holder) {
+            setListener(imagen, position)
+            if (imagen.v_foto != null) {
+                holder.bindHolder.ivListaImagen.setImageBitmap(imagen.v_foto)
+            }
+            else {
+                holder.bindHolder.ivListaImagen.setImageResource(R.drawable.ic_imagen_vacio)
+            }
         }
-        vh.ivImagen.setImageBitmap(cl_imagen.v_foto)
-
-        return view
-    }
-    override fun getItem(position: Int): Any {
-        return imagenesList[position]
-    }
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
-    override fun getCount(): Int {
-        return imagenesList.size
     }
 
-    class ViewHolder(view: View?) {
-        val ivImagen: ImageView
-        init {
-            this.ivImagen = view!!.findViewById(R.id.iv_lista_imagen)
+    override fun getItemCount(): Int = values.size
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val bindHolder = ListImagenesBinding.bind (view)
+
+        fun setListener (imagen: ImagenesReceta, position: Int) {
+            bindHolder.ivListaImagen.setOnClickListener {detImagenListener.onClick_detImagen(imagen, position)}
         }
     }
 }

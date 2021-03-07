@@ -72,7 +72,8 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
         val admin = AdminSQLite(activity, "recetas", null, rParam.VERSION_BD)
         var fila = admin.consultar(
             admin,
-            "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto from recetas where codigo = " + v_id_receta + " order by codigo desc"
+            "select codigo, descripcion, elaboracion, ingredientes, favorito, url, foto, categoria, maquina_cocinado "+
+                    " from recetas where codigo = " + v_id_receta + " order by codigo desc"
         )
         var listaRecetas = admin.carga_lista_recetas(fila, 1)
         vr_receta = listaRecetas.first()
@@ -116,7 +117,7 @@ class FragmentDetReceta : Fragment(), View.OnClickListener {
         v_valores[1] = v_elaboracion
         v_valores[2] = v_ingredientes
         v_valores[3] = v_url
-        v_valores[4] = v_favorito!!
+        v_valores[4] = v_favorito
 
         val admin = AdminSQLite(activity, "recetas", null, rParam.VERSION_BD)
         admin.actualizar(admin, "recetas", p_id_receta, v_campos, v_valores)

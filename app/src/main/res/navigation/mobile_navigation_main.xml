@@ -8,18 +8,18 @@
     <fragment
         android:id="@+id/nav_ultimas"
         android:name="com.ivanr.misrecetas.fragments.FragmentUltimas"
-        android:label="@string/tab_text_1"
+        android:label="@string/Recetas"
         tools:layout="@layout/fragment_main_ultimas" />
 
     <fragment
         android:id="@+id/nav_favoritas"
         android:name="com.ivanr.misrecetas.fragments.FragmentFavoritos"
-        android:label="@string/tab_text_2"
+        android:label="@string/Favoritos"
         tools:layout="@layout/fragment_main_ultimas" />
 
     <fragment
         android:id="@+id/nav_categorias"
         android:name="com.ivanr.misrecetas.fragments.FragmentCategorias"
-        android:label="@string/tab_text_3"
+        android:label="@string/Categorias"
         tools:layout="@layout/fragment_main_categorias" />
 </navigation>
