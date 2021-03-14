@@ -3,7 +3,7 @@ package com.ivanr.misrecetas.utilidades
 object Parametros {
     val VERSION_BD: Int = 1
     val PHOTO_SELECTED = 0
-
+    val PALABRAS_CLAVE_INGREDIENTES = arrayOf("1 k","500 g", "2 l", "ml.", "cucharada")
     val v_css:String = "h1{\n" +
             "            display: flex;\n" +
             "            flex-direction: row;\n" +

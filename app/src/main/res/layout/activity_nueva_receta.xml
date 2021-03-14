@@ -85,7 +85,7 @@
                 <EditText
                     android:id="@+id/etUrl"
                     style="@style/Widget.MaterialComponents.TextView"
-                    android:layout_width="317dp"
+                    android:layout_width="292dp"
                     android:layout_height="wrap_content"
                     android:autofillHints=""
                     android:ems="10"
@@ -95,9 +95,16 @@
                     tools:ignore="MissingConstraints" />
 
                 <ImageButton
+                    android:id="@+id/ib_descarga_url"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/ic_baseline_download_24_green" />
+
+                <ImageButton
                     android:id="@+id/ib_ir_url"
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
+                    android:layout_width="40dp"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/buscar" />
 
